@@ -138,7 +138,13 @@ export default function ChatDetailPage() {
   const handlePaywallPurchase = async (plan: 'weekly' | 'monthly' | 'yearly') => {
     await upgradeSubscription(plan);
     setShowPaywall(false);
-    setBadgeRefreshKey((prev) => prev + 1);
+    const data = await fetchSubscriptionStatus().catch(() => null);
+    if (data?.messageInfo) {
+      setRemainingMessages(data.messageInfo.remainingMessages);
+      if (data.messageInfo.plan === 'free' || data.messageInfo.plan === 'premium' || data.messageInfo.plan === 'trial') {
+        setCurrentPlan(data.messageInfo.plan);
+      }
+    }
   };
 
   const handleCopy = (id: string, content: string) => {
