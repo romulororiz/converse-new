@@ -190,4 +190,94 @@
     border-radius: 10px;
     border-left: 3px solid var(--neo-highlight);
   }
+
+  /* ── Neon Auth Form Overrides ── */
+  .neon-auth-form > div {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .neon-auth-form label {
+    color: #3D3A37 !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+  }
+
+  .neon-auth-form input {
+    background-color: #fff !important;
+    border: 1.5px solid #E0DCD7 !important;
+    border-radius: 10px !important;
+    color: #1A1816 !important;
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+    transition: border-color 0.15s ease !important;
+  }
+
+  .neon-auth-form input::placeholder {
+    color: #A09A94 !important;
+  }
+
+  .neon-auth-form input:focus {
+    border-color: #1A3550 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(26, 53, 80, 0.08) !important;
+  }
+
+  /* Primary submit button */
+  .neon-auth-form button[type="submit"] {
+    background-color: #1A3550 !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    padding: 10px 0 !important;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease !important;
+  }
+
+  .neon-auth-form button[type="submit"]:hover {
+    background-color: #163048 !important;
+    box-shadow: 0 4px 12px rgba(26, 53, 80, 0.15) !important;
+  }
+
+  /* Google / social sign-in button */
+  .neon-auth-form button:not([type="submit"]) {
+    background-color: #fff !important;
+    color: #3D3A37 !important;
+    border: 1.5px solid #E0DCD7 !important;
+    border-radius: 10px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    transition: border-color 0.15s ease, background-color 0.15s ease !important;
+  }
+
+  .neon-auth-form button:not([type="submit"]):hover {
+    background-color: #F5F3F0 !important;
+    border-color: #C5C0BA !important;
+    color: #1A1816 !important;
+  }
+
+  /* Links inside auth form */
+  .neon-auth-form a {
+    color: #1A3550 !important;
+    font-weight: 500 !important;
+  }
+
+  .neon-auth-form a:hover {
+    text-decoration: underline !important;
+  }
+
+  /* Divider text ("Or continue with") */
+  .neon-auth-form hr,
+  .neon-auth-form [role="separator"] {
+    border-color: #E0DCD7 !important;
+  }
+
+  /* General text inside the form */
+  .neon-auth-form p,
+  .neon-auth-form span,
+  .neon-auth-form div {
+    color: inherit;
+  }
 }
