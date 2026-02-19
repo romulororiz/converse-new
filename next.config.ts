@@ -3,6 +3,7 @@ import path from 'path';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  allowedDevOrigins: ['*'],
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: '**' },
