@@ -1,29 +1,29 @@
 import type { Metadata } from 'next';
-import { Inter, Fraunces } from 'next/font/google';
+import { DM_Sans, Lora } from 'next/font/google';
 import './globals.css';
 import NeonAuthProvider from '@/components/NeonAuthProvider';
 import AuthSync from '@/components/AuthSync';
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-dm-sans',
   display: 'swap',
 });
 
-const fraunces = Fraunces({
+const lora = Lora({
   subsets: ['latin'],
-  variable: '--font-fraunces',
+  variable: '--font-lora',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
   title: 'ConversAI',
-  description: 'Interactive Library — Discover books that transform lives.',
+  description: 'Interactive Library — Chat with your favorite books.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${dmSans.variable} ${lora.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-background text-foreground font-sans antialiased">
         <NeonAuthProvider>
           <AuthSync />
