@@ -14,8 +14,10 @@ import {
   Settings,
   CreditCard,
   LogOut,
-  Sparkles,
+  BookMarked,
+  Target,
   X,
+  ChevronDown,
 } from 'lucide-react';
 import { Command } from 'cmdk';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -30,6 +32,8 @@ const navItems = [
   { name: 'Discover', href: '/app/discover', icon: Compass },
   { name: 'Library', href: '/app/books', icon: BookOpen },
   { name: 'Chats', href: '/app/chats', icon: MessageSquare },
+  { name: 'Highlights', href: '/app/highlights', icon: BookMarked },
+  { name: 'Goals', href: '/app/goals', icon: Target },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -97,107 +101,75 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Desktop sidebar -- Spotify style: fixed, icon-only, 56px */}
-      <aside className="hidden md:flex flex-col fixed top-0 left-0 h-screen z-40 w-14 bg-surface-1 border-r border-border">
-        <div className="h-14 flex items-center justify-center border-b border-border shrink-0">
-          <Link href="/app">
-            <span className="w-8 h-8 rounded-[10px] accent-button inline-flex items-center justify-center">
-              <Sparkles size={14} />
+      {/* Desktop sidebar — 220px wide with labels */}
+      <aside className="hidden md:flex flex-col fixed top-0 left-0 h-screen z-40 w-56 bg-white border-r border-border">
+        {/* Logo */}
+        <div className="h-16 flex items-center px-5 border-b border-border shrink-0">
+          <Link href="/app" className="flex items-center gap-2.5 group">
+            <span className="w-8 h-8 rounded-[10px] bg-primary flex items-center justify-center shrink-0 transition-transform group-hover:scale-105">
+              <BookOpen size={15} className="text-white" />
             </span>
+            <span className="font-bold text-[17px] tracking-tight text-foreground">ConversAI</span>
           </Link>
         </div>
 
-        <nav className="flex-1 py-3 px-1.5 space-y-1">
+        {/* Nav */}
+        <nav className="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
           {navItems.map((item) => {
             const active = isActive(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                title={item.name}
+                data-testid={`nav-${item.name.toLowerCase()}`}
                 className={cn(
-                  'group relative flex items-center justify-center w-11 h-11 rounded-[12px] transition-colors duration-150 mx-auto',
+                  'flex items-center gap-3 px-3 h-10 rounded-[10px] transition-all duration-150 text-sm font-medium',
                   active
-                    ? 'bg-primary/15 text-primary'
+                    ? 'bg-[#F0F4F8] text-primary'
                     : 'text-muted-foreground hover:text-foreground hover:bg-surface-2'
                 )}
               >
-                <item.icon size={20} strokeWidth={active ? 2.2 : 1.8} />
-                {active && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full bg-primary" />}
-                <span className="absolute left-14 px-2.5 py-1 rounded-[8px] bg-surface-2 border border-border text-xs font-medium text-foreground opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50">
-                  {item.name}
-                </span>
+                <item.icon size={18} strokeWidth={active ? 2.2 : 1.8} />
+                {item.name}
+                {active && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-primary" />}
               </Link>
             );
           })}
         </nav>
 
-        <div className="p-1.5 border-t border-border space-y-1">
+        {/* Bottom — settings + profile */}
+        <div className="p-3 border-t border-border space-y-0.5">
           <Link
             href="/app/settings"
-            title="Settings"
             className={cn(
-              'flex items-center justify-center w-11 h-11 rounded-[12px] transition-colors duration-150 mx-auto',
-              isActive('/app/settings') ? 'bg-primary/15 text-primary' : 'text-muted-foreground hover:text-foreground hover:bg-surface-2'
+              'flex items-center gap-3 px-3 h-10 rounded-[10px] transition-all duration-150 text-sm font-medium',
+              isActive('/app/settings') ? 'bg-[#F0F4F8] text-primary' : 'text-muted-foreground hover:text-foreground hover:bg-surface-2'
             )}
           >
-            <Settings size={18} />
-          </Link>
-          <Link
-            href="/app/profile"
-            title="Profile"
-            className="flex items-center justify-center w-11 h-11 mx-auto"
-          >
-            {profile?.avatar_url ? (
-              <Image src={profile.avatar_url} alt="" width={28} height={28} className="rounded-full object-cover" />
-            ) : (
-              <span className="w-7 h-7 rounded-full bg-primary/20 text-primary text-[11px] font-bold flex items-center justify-center">
-                {initials}
-              </span>
-            )}
-          </Link>
-        </div>
-      </aside>
-
-      {/* Main content */}
-      <div className="flex-1 md:ml-14 flex flex-col min-h-screen">
-        {/* Top bar -- ChatGPT style */}
-        <header className="sticky top-0 z-30 h-14 border-b border-border bg-background/80 backdrop-blur-sm flex items-center px-4 gap-3">
-          {/* Mobile logo */}
-          <Link href="/app" className="md:hidden flex items-center gap-2 shrink-0">
-            <span className="w-7 h-7 rounded-[8px] accent-button inline-flex items-center justify-center">
-              <Sparkles size={12} />
-            </span>
+            <Settings size={18} strokeWidth={1.8} />
+            Settings
           </Link>
 
-          {/* Search trigger */}
-          <button
-            onClick={() => setSearchOpen(true)}
-            className="flex-1 max-w-lg mx-auto h-9 pl-3 pr-3 rounded-[10px] bg-surface-2/60 border border-border text-sm text-muted-foreground flex items-center gap-2 hover:bg-surface-2 transition-colors cursor-text"
-          >
-            <Search size={14} />
-            <span className="flex-1 text-left">Search books, topics...</span>
-            <kbd className="hidden sm:inline text-[10px] font-mono bg-surface-1 border border-border px-1.5 py-0.5 rounded text-muted-foreground">
-              Ctrl K
-            </kbd>
-          </button>
-
-          {/* Avatar dropdown */}
-          <div ref={avatarRef} className="relative shrink-0">
+          {/* Profile */}
+          <div ref={avatarRef} className="relative">
             <button
               onClick={() => setAvatarOpen((v) => !v)}
-              className="flex items-center gap-2 h-9 pl-1 pr-2 rounded-full hover:bg-surface-2 transition-colors cursor-pointer"
+              className="w-full flex items-center gap-3 px-3 h-11 rounded-[10px] hover:bg-surface-2 transition-colors cursor-pointer"
             >
               {profile?.avatar_url ? (
-                <Image src={profile.avatar_url} alt="" width={28} height={28} className="rounded-full object-cover" />
+                <Image src={profile.avatar_url} alt="" width={28} height={28} className="rounded-full object-cover shrink-0" />
               ) : (
-                <span className="w-7 h-7 rounded-full bg-primary/20 text-primary text-[11px] font-bold flex items-center justify-center">
+                <span className="w-7 h-7 rounded-full bg-primary/10 text-primary text-[11px] font-bold flex items-center justify-center shrink-0">
                   {initials}
                 </span>
               )}
-              <span className="hidden sm:block text-sm font-medium truncate max-w-[120px]">
-                {profile?.full_name || profile?.email?.split('@')[0] || 'Account'}
-              </span>
+              <div className="flex-1 min-w-0 text-left">
+                <p className="text-sm font-medium truncate text-foreground leading-tight">
+                  {profile?.full_name?.split(' ')[0] || 'Account'}
+                </p>
+                <p className="text-[11px] text-muted-foreground truncate leading-tight">{profile?.email?.split('@')[0]}</p>
+              </div>
+              <ChevronDown size={13} className="text-muted-foreground shrink-0" />
             </button>
 
             <AnimatePresence>
@@ -207,7 +179,84 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 4, scale: 0.97 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute right-0 top-12 w-56 surface-card py-1.5 shadow-lg z-50"
+                  className="absolute bottom-full left-0 right-0 mb-1 surface-card py-1.5 shadow-lg z-50"
+                >
+                  {[
+                    { label: 'Profile', icon: User, href: '/app/profile' },
+                    { label: 'Billing', icon: CreditCard, href: '/app/billing' },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setAvatarOpen(false)}
+                      className="flex items-center gap-2.5 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-surface-2 transition-colors"
+                    >
+                      <item.icon size={14} /> {item.label}
+                    </Link>
+                  ))}
+                  <div className="border-t border-border mt-1 pt-1">
+                    <Link
+                      href="/auth/sign-in"
+                      onClick={() => setAvatarOpen(false)}
+                      className="flex items-center gap-2.5 px-3 py-2 text-sm text-danger hover:bg-surface-2 transition-colors"
+                    >
+                      <LogOut size={14} /> Sign out
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main content — offset by sidebar width */}
+      <div className="flex-1 md:ml-56 flex flex-col min-h-screen">
+        {/* Top bar */}
+        <header className="sticky top-0 z-30 h-14 border-b border-border bg-white/90 backdrop-blur-sm flex items-center px-4 gap-3">
+          {/* Mobile logo */}
+          <Link href="/app" className="md:hidden flex items-center gap-2 shrink-0">
+            <span className="w-7 h-7 rounded-[8px] bg-primary flex items-center justify-center">
+              <BookOpen size={13} className="text-white" />
+            </span>
+            <span className="font-bold text-base text-foreground">ConversAI</span>
+          </Link>
+
+          {/* Search trigger */}
+          <button
+            onClick={() => setSearchOpen(true)}
+            data-testid="search-trigger"
+            className="flex-1 max-w-lg mx-auto h-9 pl-3 pr-3 rounded-[10px] bg-surface-2 border border-border text-sm text-muted-foreground flex items-center gap-2 hover:border-border/80 transition-colors cursor-text"
+          >
+            <Search size={14} className="text-muted-foreground/70" />
+            <span className="flex-1 text-left">Search books, topics...</span>
+            <kbd className="hidden sm:inline text-[10px] font-mono bg-white border border-border px-1.5 py-0.5 rounded text-muted-foreground">
+              Ctrl K
+            </kbd>
+          </button>
+
+          {/* Mobile avatar */}
+          <div ref={avatarRef} className="relative shrink-0 md:hidden">
+            <button
+              onClick={() => setAvatarOpen((v) => !v)}
+              className="flex items-center gap-2 h-9 pl-1 pr-2 rounded-full hover:bg-surface-2 transition-colors cursor-pointer"
+            >
+              {profile?.avatar_url ? (
+                <Image src={profile.avatar_url} alt="" width={28} height={28} className="rounded-full object-cover" />
+              ) : (
+                <span className="w-7 h-7 rounded-full bg-primary/10 text-primary text-[11px] font-bold flex items-center justify-center">
+                  {initials}
+                </span>
+              )}
+            </button>
+            <AnimatePresence>
+              {avatarOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 4, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 4, scale: 0.97 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-12 w-52 surface-card py-1.5 shadow-lg z-50"
                 >
                   <div className="px-3 py-2 border-b border-border mb-1">
                     <p className="text-sm font-medium truncate">{profile?.full_name || 'User'}</p>
@@ -218,22 +267,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     { label: 'Settings', icon: Settings, href: '/app/settings' },
                     { label: 'Billing', icon: CreditCard, href: '/app/billing' },
                   ].map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setAvatarOpen(false)}
-                      className="flex items-center gap-2.5 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-surface-2 transition-colors"
-                    >
-                      <item.icon size={15} /> {item.label}
+                    <Link key={item.href} href={item.href} onClick={() => setAvatarOpen(false)}
+                      className="flex items-center gap-2.5 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-surface-2 transition-colors">
+                      <item.icon size={14} /> {item.label}
                     </Link>
                   ))}
                   <div className="border-t border-border mt-1 pt-1">
-                    <Link
-                      href="/auth/sign-in"
-                      onClick={() => setAvatarOpen(false)}
-                      className="flex items-center gap-2.5 px-3 py-2 text-sm text-danger hover:bg-surface-2 transition-colors"
-                    >
-                      <LogOut size={15} /> Sign out
+                    <Link href="/auth/sign-in" onClick={() => setAvatarOpen(false)}
+                      className="flex items-center gap-2.5 px-3 py-2 text-sm text-danger hover:bg-surface-2 transition-colors">
+                      <LogOut size={14} /> Sign out
                     </Link>
                   </div>
                 </motion.div>
@@ -253,22 +295,22 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </main>
       </div>
 
-      {/* Mobile bottom nav -- icons only, amber dot indicator */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface-1 border-t border-border px-2 py-2 safe-bottom">
+      {/* Mobile bottom nav */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-border px-1 py-1.5 safe-bottom">
         <div className="flex items-center justify-around">
-          {[...navItems, { name: 'Profile', href: '/app/profile', icon: User }].map((item) => {
+          {[...navItems.slice(0, 4), { name: 'Profile', href: '/app/profile', icon: User }].map((item) => {
             const active = isActive(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'flex flex-col items-center gap-1 py-1 px-4 rounded-[12px] transition-colors',
+                  'flex flex-col items-center gap-0.5 py-1 px-3 rounded-[10px] transition-colors min-w-0',
                   active ? 'text-primary' : 'text-muted-foreground'
                 )}
               >
                 <item.icon size={20} strokeWidth={active ? 2.2 : 1.8} />
-                {active && <span className="w-1 h-1 rounded-full bg-primary" />}
+                <span className="text-[10px] font-medium">{item.name}</span>
               </Link>
             );
           })}
@@ -283,7 +325,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[80] bg-black/50 backdrop-blur-sm"
+              className="fixed inset-0 z-[80] bg-black/30 backdrop-blur-sm"
               onClick={() => { setSearchOpen(false); setSearchQuery(''); setSearchResults([]); }}
             />
             <motion.div
@@ -291,7 +333,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.15 }}
-              className="fixed z-[81] top-[10%] left-1/2 -translate-x-1/2 w-full max-w-xl mx-4"
+              className="fixed z-[81] top-[8%] left-1/2 -translate-x-1/2 w-full max-w-xl px-4"
             >
               <Command className="surface-card overflow-hidden shadow-xl" shouldFilter={false}>
                 <div className="flex items-center gap-2 px-4 h-12 border-b border-border">
@@ -311,13 +353,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 </div>
                 <Command.List className="max-h-[360px] overflow-y-auto p-2">
                   {searchQuery.trim() === '' ? (
-                    <div className="px-3 py-6 text-center text-sm text-muted-foreground">
-                      Start typing to search books...
-                    </div>
+                    <div className="px-3 py-6 text-center text-sm text-muted-foreground">Start typing to search books...</div>
                   ) : searchLoading ? (
-                    <div className="px-3 py-6 text-center text-sm text-muted-foreground">
-                      Searching...
-                    </div>
+                    <div className="px-3 py-6 text-center text-sm text-muted-foreground">Searching...</div>
                   ) : searchResults.length === 0 ? (
                     <Command.Empty className="px-3 py-6 text-center text-sm text-muted-foreground">
                       No books found for &ldquo;{searchQuery}&rdquo;
