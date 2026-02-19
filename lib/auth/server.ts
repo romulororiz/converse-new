@@ -1,13 +1,18 @@
 import { createNeonAuth } from '@neondatabase/auth/next/server';
 
 const baseUrl = process.env.NEON_AUTH_BASE_URL ?? '';
-const cookieSecret = process.env.NEON_AUTH_COOKIE_SECRET ?? 'preview-secret-placeholder-not-for-production';
+const cookieSecret = process.env.NEON_AUTH_COOKIE_SECRET ?? '';
 
-if (!baseUrl) {
-  console.warn('[ConversAI] NEON_AUTH_BASE_URL not set — auth features disabled in preview mode.');
-}
+const noopHandler = () => {
+  const handler = async () => new Response(JSON.stringify({ error: 'Auth not configured' }), { status: 503, headers: { 'Content-Type': 'application/json' } });
+  return { GET: handler, POST: handler };
+};
 
-// Export a no-op auth object when env vars are missing
-export const auth = baseUrl
+const noopMiddleware = () => () => {
+  const { NextResponse } = require('next/server');
+  return NextResponse.next();
+};
+
+export const auth = baseUrl && cookieSecret && cookieSecret.length >= 32
   ? createNeonAuth({ baseUrl, cookies: { secret: cookieSecret } })
-  : ({ middleware: () => (req: Request) => new Response(null, { status: 200 }) } as ReturnType<typeof createNeonAuth>);
+  : { handler: noopHandler, middleware: noopMiddleware, getSession: async () => null } as unknown as ReturnType<typeof createNeonAuth>;
