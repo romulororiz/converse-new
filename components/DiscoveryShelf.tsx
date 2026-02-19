@@ -27,13 +27,13 @@ export function DiscoveryShelf({
   return (
     <section className="mb-8">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold">{title}</h2>
+        <h2 className="text-[17px] font-bold text-foreground">{title}</h2>
         {seeAllHref && (
           <Link
             href={seeAllHref}
-            className="text-sm text-primary hover:text-primary/80 inline-flex items-center gap-1 transition-colors"
+            className="text-xs font-semibold text-primary hover:text-primary/80 inline-flex items-center gap-1 transition-colors"
           >
-            See all <ChevronRight size={14} />
+            See all <ChevronRight size={13} />
           </Link>
         )}
       </div>
