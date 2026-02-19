@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { DM_Sans, Lora } from 'next/font/google';
 import { NeonAuthProvider } from '@/components/NeonAuthProvider';
-import { AuthSync } from '@/components/AuthSync';
 import './globals.css';
+
+const AuthSync = dynamic(() => import('@/components/AuthSync').then(m => ({ default: m.AuthSync })), { ssr: false });
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
