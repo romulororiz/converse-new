@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { BookOpen, ArrowRight } from 'lucide-react';
 import { SignedIn, SignedOut } from '@neondatabase/auth/react';
 
 export function PublicShell({ children }: { children: React.ReactNode }) {
