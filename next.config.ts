@@ -3,7 +3,7 @@ import path from 'path';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  allowedDevOrigins: ['*'],
+  allowedDevOrigins: ['book-chat-redesign.cluster-3.preview.emergentcf.cloud', 'book-chat-redesign.preview.emergentagent.com'],
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: '**' },
