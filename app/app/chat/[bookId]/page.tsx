@@ -16,7 +16,7 @@ import { useHighlights } from '@/lib/hooks/useHighlights';
 import type { Book } from '@/lib/core';
 import { fetchBookChat, sendBookMessage, type ChatMessage } from '@/lib/services/chats';
 import { upgradeSubscription } from '@/lib/services/subscription';
-import Link from 'next/link';
+import Image from 'next/image';
 
 interface Message {
   id: string;
