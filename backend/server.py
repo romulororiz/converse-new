@@ -1,10 +1,8 @@
 from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import Response
 import httpx
 
 app = FastAPI()
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 NEXTJS_URL = "http://localhost:3000"
 
@@ -13,8 +11,10 @@ async def proxy_to_nextjs(request: Request, path: str):
     url = f"{NEXTJS_URL}/api/{path}"
     headers = dict(request.headers)
     headers.pop("host", None)
+    headers.pop("content-length", None)
     body = await request.body()
-    async with httpx.AsyncClient(timeout=60.0) as client:
+
+    async with httpx.AsyncClient(timeout=60.0, follow_redirects=False) as client:
         response = await client.request(
             method=request.method,
             url=url,
@@ -22,8 +22,23 @@ async def proxy_to_nextjs(request: Request, path: str):
             content=body,
             params=dict(request.query_params),
         )
-    return StreamingResponse(
-        iter([response.content]),
+
+    # Build response headers preserving all Set-Cookie headers
+    resp_headers = {}
+    for key, value in response.headers.multi_items():
+        if key.lower() in ("transfer-encoding", "content-encoding", "content-length"):
+            continue
+        if key.lower() == "set-cookie":
+            # Append to existing or create new
+            if "set-cookie" in resp_headers:
+                resp_headers["set-cookie"] += f", {value}"
+            else:
+                resp_headers["set-cookie"] = value
+        else:
+            resp_headers[key] = value
+
+    return Response(
+        content=response.content,
         status_code=response.status_code,
-        headers=dict(response.headers),
+        headers=resp_headers,
     )
