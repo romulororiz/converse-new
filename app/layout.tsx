@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import { DM_Sans, Lora } from 'next/font/google';
 import './globals.css';
-import NeonAuthProvider from '@/components/NeonAuthProvider';
-import AuthSync from '@/components/AuthSync';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -23,12 +21,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${lora.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${dmSans.variable} ${lora.variable}`}>
       <body className="min-h-screen bg-background text-foreground font-sans antialiased">
-        <NeonAuthProvider>
-          <AuthSync />
-          {children}
-        </NeonAuthProvider>
+        {children}
       </body>
     </html>
   );
