@@ -1,0 +1,680 @@
+{
+  "executedAt": "2026-02-18T12:36:27.429Z",
+  "mode": "apply",
+  "offset": 50,
+  "batchSize": 25,
+  "totalInBatch": 25,
+  "updated": [],
+  "skippedNoMatch": [
+    {
+      "id": "bc4f63bd-9632-40c6-a21b-04ca414fe267",
+      "title": "The Bhagavad Gita",
+      "author": "Anonymous (Translated)"
+    },
+    {
+      "id": "ff5b6279-e9c4-4277-8c59-83cec87d0783",
+      "title": "The Island of Doctor Moreau",
+      "author": "H.G. Wells"
+    }
+  ],
+  "skippedUncertain": [
+    {
+      "id": "3abe6abc-c7f8-46d2-bf1b-4bfe6d6e71fa",
+      "title": "The Bible (KJV)",
+      "author": "Various",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/12707846-L.jpg",
+      "topCandidate": {
+        "title": "KJV On-the-Go Bible--soft leather-look, ginger",
+        "author": [
+          "Various"
+        ],
+        "score": 43,
+        "url": "https://covers.openlibrary.org/b/id/10389579-L.jpg",
+        "matchDetails": {
+          "score": 43,
+          "exactTitle": false,
+          "exactAuthor": true,
+          "titleOverlap": 0.3333333333333333,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": null,
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "0d4fe673-c3de-4d20-baad-b359ca0e6428",
+      "title": "The Brothers Karamazov",
+      "author": "Fyodor Dostoevsky",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/11263774-L.jpg",
+      "topCandidate": {
+        "title": "The Brothers Karamazov",
+        "author": [
+          "Фёдор Михайлович Достоевский",
+          "Constance Garrett"
+        ],
+        "score": 70,
+        "url": "https://covers.openlibrary.org/b/id/11263774-L.jpg",
+        "matchDetails": {
+          "score": 70,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0
+        }
+      },
+      "secondCandidate": {
+        "title": "The Brothers Karamazov",
+        "author": [
+          "Фёдор Михайлович Достоевский"
+        ],
+        "score": 70,
+        "url": "https://covers.openlibrary.org/b/id/12621719-L.jpg",
+        "matchDetails": {
+          "score": 70,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "b32de2a8-d9b1-4ece-8b81-a9a3e286e757",
+      "title": "The Call of the Wild",
+      "author": "Jack London",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/12393037-L.jpg",
+      "topCandidate": {
+        "title": "The Call of the Wild",
+        "author": [
+          "Jack London"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/12393037-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The Call Of The Wild",
+        "author": [
+          "Jack London"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/14921913-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "187e5510-8d69-46aa-b563-078599ae69b6",
+      "title": "The Communist Manifesto",
+      "author": "Karl Marx and Friedrich Engels",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/11600600-L.jpg",
+      "topCandidate": {
+        "title": "The Communist Manifesto",
+        "author": [
+          "Marx-Engels"
+        ],
+        "score": 78,
+        "url": "https://covers.openlibrary.org/b/id/14837538-L.jpg",
+        "matchDetails": {
+          "score": 78,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0.4
+        }
+      },
+      "secondCandidate": {
+        "title": "Capital by Marx; Manifesto Of The Communist Party by Marx and Engels - Great Books Of The Western World, Book 50",
+        "author": [
+          "Karl; Capital Edited by Engels, Friedrich; Manifesto by Marx, Karl and Engels, Friedrich Marx"
+        ],
+        "score": 21,
+        "url": "https://covers.openlibrary.org/b/id/14924011-L.jpg",
+        "matchDetails": {
+          "score": 21,
+          "exactTitle": false,
+          "exactAuthor": false,
+          "titleOverlap": 0.1875,
+          "authorOverlap": 0.5555555555555556
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "593674a2-74ce-4161-98f4-c9ba2f1ca59c",
+      "title": "The House of Mirth",
+      "author": "Edith Wharton",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/9329539-L.jpg",
+      "topCandidate": {
+        "title": "The House of Mirth",
+        "author": [
+          "Edith Wharton"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/9329539-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The House of Mirth",
+        "author": [
+          "Edith Wharton"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/13527836-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "d70d0672-358b-4bd5-b83b-68d7395d6a2f",
+      "title": "The Idiot",
+      "author": "Fyodor Dostoevsky",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/12371520-L.jpg",
+      "topCandidate": {
+        "title": "The Idiot",
+        "author": [
+          "Фёдор Михайлович Достоевский"
+        ],
+        "score": 70,
+        "url": "https://covers.openlibrary.org/b/id/12371520-L.jpg",
+        "matchDetails": {
+          "score": 70,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0
+        }
+      },
+      "secondCandidate": {
+        "title": "The Idiot",
+        "author": [
+          "Фёдор Михайлович Достоевский"
+        ],
+        "score": 70,
+        "url": "https://covers.openlibrary.org/b/id/12091733-L.jpg",
+        "matchDetails": {
+          "score": 70,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "bd863cf9-4dce-4499-8987-7c125ab47757",
+      "title": "The Imitation of Christ",
+      "author": "Thomas Ã  Kempis",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/8542106-L.jpg",
+      "topCandidate": {
+        "title": "Of the Imitation of Christ",
+        "author": [
+          "Thomas à Kempis",
+          "Thomas Rogers"
+        ],
+        "score": 80,
+        "url": "https://covers.openlibrary.org/b/id/15028868-L.jpg",
+        "matchDetails": {
+          "score": 80,
+          "exactTitle": false,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 0.75
+        }
+      },
+      "secondCandidate": {
+        "title": "Of the imitation of Christ",
+        "author": [
+          "Thomas à Kempis"
+        ],
+        "score": 80,
+        "url": "https://covers.openlibrary.org/b/id/5787325-L.jpg",
+        "matchDetails": {
+          "score": 80,
+          "exactTitle": false,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "1d787da3-1180-4546-a9cc-710d3edcbf65",
+      "title": "The Invisible Man",
+      "author": "H.G. Wells",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/6419199-L.jpg",
+      "topCandidate": {
+        "title": "The Invisible Man",
+        "author": [
+          "H. G. Wells"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/6419199-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The Invisible Man",
+        "author": [
+          "H. G. Wells"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/13202162-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "4a860dad-0c36-420c-a361-cf9a66895450",
+      "title": "The Mysterious Island",
+      "author": "Jules Verne",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/7883120-L.jpg",
+      "topCandidate": {
+        "title": "The mysterious island",
+        "author": [
+          "Jules Verne"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/7883120-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The Mysterious Island",
+        "author": [
+          "Jules Verne"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/11310113-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "ceadecb2-18fb-44e9-be1f-4de0b104ac7e",
+      "title": "The Picture of Dorian Gray",
+      "author": "Oscar Wilde",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/14314858-L.jpg",
+      "topCandidate": {
+        "title": "The Picture of Dorian Gray",
+        "author": [
+          "Oscar Wilde"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/14314858-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The Picture of Dorian Gray",
+        "author": [
+          "Oscar Wilde",
+          "Paul Lincoln"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/12062319-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 0.5
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "d1f914f6-78cf-4a0d-93e3-e3bb3aa1ac53",
+      "title": "The Prince",
+      "author": "NiccolÃ² Machiavelli",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/12726168-L.jpg",
+      "topCandidate": {
+        "title": "The Prince",
+        "author": [
+          "Niccolò Machiavelli"
+        ],
+        "score": 80,
+        "url": "https://covers.openlibrary.org/b/id/12726168-L.jpg",
+        "matchDetails": {
+          "score": 80,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0.5
+        }
+      },
+      "secondCandidate": {
+        "title": "The prince and The discourses",
+        "author": [
+          "Niccolò Machiavelli"
+        ],
+        "score": 38,
+        "url": "https://covers.openlibrary.org/b/id/66346-L.jpg",
+        "matchDetails": {
+          "score": 38,
+          "exactTitle": false,
+          "exactAuthor": false,
+          "titleOverlap": 0.5,
+          "authorOverlap": 0.5
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "1df3990c-b20f-4e75-a0b0-72b3129a5563",
+      "title": "The Republic",
+      "author": "Plato",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/14377522-L.jpg",
+      "topCandidate": {
+        "title": "The republic and other works",
+        "author": [
+          "Πλάτων"
+        ],
+        "score": 22,
+        "url": "https://covers.openlibrary.org/b/id/14397904-L.jpg",
+        "matchDetails": {
+          "score": 22,
+          "exactTitle": false,
+          "exactAuthor": false,
+          "titleOverlap": 0.4,
+          "authorOverlap": 0
+        }
+      },
+      "secondCandidate": {
+        "title": "The Republic of Plato; Volume 2",
+        "author": [
+          "Πλάτων",
+          "Benjamin Jowett"
+        ],
+        "score": 18,
+        "url": "https://covers.openlibrary.org/b/id/11242504-L.jpg",
+        "matchDetails": {
+          "score": 18,
+          "exactTitle": false,
+          "exactAuthor": false,
+          "titleOverlap": 0.3333333333333333,
+          "authorOverlap": 0
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "f9b8b7e3-7f65-40cb-9072-bf4852940e49",
+      "title": "The Scarlet Pimpernel",
+      "author": "Baroness Orczy",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/479102-L.jpg",
+      "topCandidate": {
+        "title": "The Scarlet Pimpernel",
+        "author": [
+          "Emma Orczy"
+        ],
+        "score": 80,
+        "url": "https://covers.openlibrary.org/b/id/479102-L.jpg",
+        "matchDetails": {
+          "score": 80,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0.5
+        }
+      },
+      "secondCandidate": {
+        "title": "The Elusive Pimpernel (Scarlet Pimpernel)",
+        "author": [
+          "Baroness Emmuska Orczy"
+        ],
+        "score": 54,
+        "url": "https://covers.openlibrary.org/b/id/502823-L.jpg",
+        "matchDetails": {
+          "score": 54,
+          "exactTitle": false,
+          "exactAuthor": false,
+          "titleOverlap": 0.75,
+          "authorOverlap": 0.6666666666666666
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "1beddf09-a3a2-4d16-8404-106aef8873b8",
+      "title": "The Science of Getting Rich",
+      "author": "Wallace D. Wattles",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/854989-L.jpg",
+      "topCandidate": {
+        "title": "The Science of Getting Rich",
+        "author": [
+          "Wallace D. Wattles",
+          "T. Cymbalisty"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/12064965-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 0.6
+        }
+      },
+      "secondCandidate": {
+        "title": "The Science of Getting Rich",
+        "author": [
+          "Wallace D. Wattles"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/12520268-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "67eb9882-8eca-42d9-8499-79e258376bd9",
+      "title": "The Secret Garden",
+      "author": "Frances Hodgson Burnett",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/12622062-L.jpg",
+      "topCandidate": {
+        "title": "The Secret Garden",
+        "author": [
+          "Frances Hodgson Burnett"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/12622062-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The Secret Garden",
+        "author": [
+          "Frances Hodgson Burnett"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/11357496-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "eda2cf31-93c6-4e0b-a709-b5bc6cc5e273",
+      "title": "The Sign of the Four",
+      "author": "Arthur Conan Doyle",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/9247987-L.jpg",
+      "topCandidate": {
+        "title": "The Sign of Four",
+        "author": [
+          "Arthur Conan Doyle"
+        ],
+        "score": 80,
+        "url": "https://covers.openlibrary.org/b/id/9247987-L.jpg",
+        "matchDetails": {
+          "score": 80,
+          "exactTitle": false,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "Sherlock Holmes (Hound of the Baskervilles / Sign of Four / Study in Scarlet / Valley of Fear)",
+        "author": [
+          "Arthur Conan Doyle"
+        ],
+        "score": 42,
+        "url": "https://covers.openlibrary.org/b/id/12531718-L.jpg",
+        "matchDetails": {
+          "score": 42,
+          "exactTitle": false,
+          "exactAuthor": true,
+          "titleOverlap": 0.3076923076923077,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "below strict threshold"
+    }
+  ],
+  "unchanged": [
+    {
+      "id": "e82095e0-4d05-4946-9bd0-bd576c520163",
+      "title": "The Awakening",
+      "author": "Kate Chopin",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/8750241-L.jpg",
+      "candidateUrl": "https://covers.openlibrary.org/b/id/8750241-L.jpg",
+      "candidateScore": 95,
+      "existingConfidence": 80
+    },
+    {
+      "id": "8c6c732b-34ca-489d-a6b0-89f0aa1dcbee",
+      "title": "The Count of Monte Cristo",
+      "author": "Alexandre Dumas",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/8851690-L.jpg",
+      "candidateUrl": "https://covers.openlibrary.org/b/id/8851690-L.jpg",
+      "candidateScore": 95,
+      "existingConfidence": 80
+    },
+    {
+      "id": "c5a6d85d-0de3-4efe-bea1-04a5240f7c67",
+      "title": "The Fall of the House of Usher",
+      "author": "Edgar Allan Poe",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/11838138-L.jpg",
+      "candidateUrl": "https://covers.openlibrary.org/b/id/11838138-L.jpg",
+      "candidateScore": 95,
+      "existingConfidence": 80
+    },
+    {
+      "id": "78a0011d-b498-4f87-aa66-893fa251129e",
+      "title": "The Hound of the Baskervilles",
+      "author": "Arthur Conan Doyle",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/8063264-L.jpg",
+      "candidateUrl": "https://covers.openlibrary.org/b/id/8063264-L.jpg",
+      "candidateScore": 95,
+      "existingConfidence": 80
+    },
+    {
+      "id": "ba527f4d-274c-4bc2-8dab-1cfb7f3f4722",
+      "title": "The Last of the Mohicans",
+      "author": "James Fenimore Cooper",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/8236937-L.jpg",
+      "candidateUrl": "https://covers.openlibrary.org/b/id/8236937-L.jpg",
+      "candidateScore": 95,
+      "existingConfidence": 80
+    },
+    {
+      "id": "84a96411-9e91-4c1f-9549-42104ad02b9f",
+      "title": "The Moonstone",
+      "author": "Wilkie Collins",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/8237041-L.jpg",
+      "candidateUrl": "https://covers.openlibrary.org/b/id/8237041-L.jpg",
+      "candidateScore": 95,
+      "existingConfidence": 80
+    },
+    {
+      "id": "a48e6593-4e7a-4c57-85ef-5e15bc0ed257",
+      "title": "The Mysterious Affair at Styles",
+      "author": "Agatha Christie",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/13699667-L.jpg",
+      "candidateUrl": "https://covers.openlibrary.org/b/id/13699667-L.jpg",
+      "candidateScore": 95,
+      "existingConfidence": 80
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "mode": "apply",
+    "totalInBatch": 25,
+    "updatedCount": 0,
+    "unchangedCount": 7,
+    "skippedNoMatchCount": 2,
+    "skippedUncertainCount": 16,
+    "errorsCount": 0
+  }
+}
