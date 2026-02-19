@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import Response
+from starlette.responses import Response as StarletteResponse
 import httpx
 
 app = FastAPI()
@@ -9,36 +9,35 @@ NEXTJS_URL = "http://localhost:3000"
 @app.api_route("/api/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"])
 async def proxy_to_nextjs(request: Request, path: str):
     url = f"{NEXTJS_URL}/api/{path}"
-    headers = dict(request.headers)
-    headers.pop("host", None)
-    headers.pop("content-length", None)
+    
+    # Forward all headers except host/content-length
+    fwd_headers = {}
+    for key, value in request.headers.items():
+        if key.lower() not in ("host", "content-length"):
+            fwd_headers[key] = value
+    
     body = await request.body()
 
     async with httpx.AsyncClient(timeout=60.0, follow_redirects=False) as client:
         response = await client.request(
             method=request.method,
             url=url,
-            headers=headers,
+            headers=fwd_headers,
             content=body,
             params=dict(request.query_params),
         )
 
-    # Build response headers preserving all Set-Cookie headers
-    resp_headers = {}
+    # Build raw headers list to support multiple Set-Cookie headers
+    raw_headers: list[tuple[str, str]] = []
     for key, value in response.headers.multi_items():
-        if key.lower() in ("transfer-encoding", "content-encoding", "content-length"):
+        lower = key.lower()
+        if lower in ("transfer-encoding", "content-encoding", "content-length"):
             continue
-        if key.lower() == "set-cookie":
-            # Append to existing or create new
-            if "set-cookie" in resp_headers:
-                resp_headers["set-cookie"] += f", {value}"
-            else:
-                resp_headers["set-cookie"] = value
-        else:
-            resp_headers[key] = value
+        raw_headers.append((key, value))
 
-    return Response(
+    return StarletteResponse(
         content=response.content,
         status_code=response.status_code,
-        headers=resp_headers,
+        headers=dict(raw_headers),  
+        media_type=response.headers.get("content-type"),
     )
