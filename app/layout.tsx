@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  console.log('[ROOT LAYOUT] Rendering root layout');
   return (
     <html lang="en">
       <body>
