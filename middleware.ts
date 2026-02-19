@@ -5,30 +5,35 @@ const PUBLIC_ROUTES = ['/', '/books', '/discover', '/pricing', '/auth'];
 
 export async function middleware(request: NextRequest) {
   const baseUrl = process.env.NEON_AUTH_BASE_URL;
+  const pathname = request.nextUrl.pathname;
+  const hasVerifier = request.nextUrl.searchParams.has('neon_auth_session_verifier');
+  
+  console.log(`[MW] ${pathname} hasVerifier=${hasVerifier} baseUrl=${!!baseUrl}`);
+  
   if (!baseUrl) {
     return NextResponse.next();
   }
 
   try {
     const { auth } = await import('@/lib/auth/server');
-    
-    // Use Neon Auth middleware for session verifier exchange + route protection
     const mw = auth.middleware({ loginUrl: '/auth/sign-in' });
     const result = await mw(request as Parameters<typeof mw>[0]);
     
-    // If it's a redirect to sign-in but the route is public, allow it instead
-    const pathname = request.nextUrl.pathname;
+    console.log(`[MW] Result: status=${result.status} location=${result.headers.get('location')}`);
+    
     const isPublic = PUBLIC_ROUTES.some(r => pathname === r || pathname.startsWith(r + '/'));
     
     if (isPublic && result.status === 307) {
       const location = result.headers.get('location') || '';
       if (location.includes('/auth/sign-in')) {
+        console.log(`[MW] Public route redirect to sign-in, allowing through`);
         return NextResponse.next();
       }
     }
     
     return result;
-  } catch {
+  } catch (e: unknown) {
+    console.error(`[MW] ERROR:`, e instanceof Error ? e.message : String(e));
     return NextResponse.next();
   }
 }
