@@ -24,7 +24,7 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
 
           <div className="flex items-center gap-3">
             <SignedIn>
-              <Link href="/app" className="accent-button h-9 px-4 inline-flex items-center gap-2 text-sm font-medium">
+              <Link href="/d" className="accent-button h-9 px-4 inline-flex items-center gap-2 text-sm font-medium">
                 Open App <ArrowRight size={14} />
               </Link>
             </SignedIn>

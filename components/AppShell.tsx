@@ -105,7 +105,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <aside className="hidden md:flex flex-col fixed top-0 left-0 h-screen z-40 w-56 bg-white border-r border-border">
         {/* Logo */}
         <div className="h-16 flex items-center px-5 border-b border-border shrink-0">
-          <Link href="/app" className="flex items-center gap-2.5 group">
+          <Link href="/d" className="flex items-center gap-2.5 group">
             <span className="w-8 h-8 rounded-[10px] bg-primary flex items-center justify-center shrink-0 transition-transform group-hover:scale-105">
               <BookOpen size={15} className="text-white" />
             </span>
@@ -140,7 +140,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {/* Bottom — settings + profile */}
         <div className="p-3 border-t border-border space-y-0.5">
           <Link
-            href="/app/settings"
+            href="/d/settings"
             className={cn(
               'flex items-center gap-3 px-3 h-10 rounded-[10px] transition-all duration-150 text-sm font-medium',
               isActive('/app/settings') ? 'bg-[#F0F4F8] text-primary' : 'text-muted-foreground hover:text-foreground hover:bg-surface-2'
@@ -215,7 +215,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {/* Top bar */}
         <header className="sticky top-0 z-30 h-14 border-b border-border bg-white/90 backdrop-blur-sm flex items-center px-4 gap-3">
           {/* Mobile logo */}
-          <Link href="/app" className="md:hidden flex items-center gap-2 shrink-0">
+          <Link href="/d" className="md:hidden flex items-center gap-2 shrink-0">
             <span className="w-7 h-7 rounded-[8px] bg-primary flex items-center justify-center">
               <BookOpen size={13} className="text-white" />
             </span>
