@@ -4,15 +4,15 @@ import { Pool, type QueryResultRow } from 'pg';
 const connectionString = process.env.DATABASE_URL;
 
 if (!connectionString) {
-  throw new Error('DATABASE_URL is not configured. Add it to .env.local.');
+  console.warn('[ConversAI] DATABASE_URL not set — database features disabled in preview mode.');
 }
 
 const globalForNeon = globalThis as unknown as { neonPool?: Pool };
 
 export const neonPool =
-  globalForNeon.neonPool ??
-  new Pool({
-    connectionString,
+  connectionString
+    ? (globalForNeon.neonPool ?? new Pool({ connectionString, ssl: { rejectUnauthorized: false }, max: 5 }))
+    : null as unknown as Pool;
     ssl: { rejectUnauthorized: false },
   });
 
