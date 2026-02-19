@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "cd /app && ./node_modules/.bin/next dev --port 3000"
+    "start": "cd /app && NEON_AUTH_BASE_URL=https://preview.neon.tech/auth NEON_AUTH_COOKIE_SECRET=preview-secret-for-rendering-only-not-real DATABASE_URL=postgresql://preview:preview@preview.neon.tech/preview OPENAI_API_KEY=sk-preview ./node_modules/.bin/next dev --port 3000"
   }
 }
