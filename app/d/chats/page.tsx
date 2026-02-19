@@ -90,7 +90,7 @@ export default function ChatsPage() {
           <p className="text-sm text-muted-foreground max-w-sm mb-5">
             Start a new conversation by selecting a book from the library.
           </p>
-          <Link href="/app/books" className="accent-button h-10 px-5 inline-flex items-center gap-2 text-sm font-medium">
+          <Link href="/d/books" className="accent-button h-10 px-5 inline-flex items-center gap-2 text-sm font-medium">
             <BookOpen size={15} /> Browse books
           </Link>
         </motion.div>

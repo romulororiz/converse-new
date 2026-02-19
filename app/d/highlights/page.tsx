@@ -42,7 +42,7 @@ export default function HighlightsPage() {
             When you chat with a book, tap the bookmark icon on any AI response to save it here as a highlight.
           </p>
           <Link
-            href="/app/books"
+            href="/d/books"
             data-testid="browse-books-btn"
             className="accent-button h-10 px-5 inline-flex items-center gap-2 text-sm font-medium"
           >

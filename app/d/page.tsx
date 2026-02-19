@@ -95,7 +95,7 @@ export default function AppHomePage() {
       {recentChatBooks.length > 0 && (
         <DiscoveryShelf
           title="Continue reading"
-          seeAllHref="/app/chats"
+          seeAllHref="/d/chats"
           books={recentChatBooks}
           loading={loading}
           onChatBook={(id) => router.push(`/app/chat/${id}`)}
@@ -105,7 +105,7 @@ export default function AppHomePage() {
       {/* New in library */}
       <DiscoveryShelf
         title="New in Library"
-        seeAllHref="/app/books?sort=newest"
+        seeAllHref="/d/books?sort=newest"
         books={newBooks}
         loading={loading}
         onChatBook={(id) => router.push(`/app/chat/${id}`)}
@@ -114,7 +114,7 @@ export default function AppHomePage() {
       {/* Popular / Trending */}
       <DiscoveryShelf
         title="Trending This Week"
-        seeAllHref="/app/books"
+        seeAllHref="/d/books"
         books={popularBooks}
         loading={loading}
         onChatBook={(id) => router.push(`/app/chat/${id}`)}
@@ -123,7 +123,7 @@ export default function AppHomePage() {
       {/* Quick access cards */}
       {!loading && (
         <div className="grid grid-cols-2 gap-4 mt-6">
-          <Link href="/app/highlights" data-testid="highlights-quick-link">
+          <Link href="/d/highlights" data-testid="highlights-quick-link">
             <div className="surface-card p-4 hover:shadow-md transition-shadow cursor-pointer group">
               <div className="w-9 h-9 rounded-[10px] bg-[#C4822A]/10 flex items-center justify-center mb-2.5 group-hover:bg-[#C4822A]/15 transition-colors">
                 <Sparkles size={16} className="text-[#C4822A]" />
@@ -132,7 +132,7 @@ export default function AppHomePage() {
               <p className="text-xs text-muted-foreground mt-0.5">Saved quotes & insights</p>
             </div>
           </Link>
-          <Link href="/app/goals" data-testid="goals-quick-link">
+          <Link href="/d/goals" data-testid="goals-quick-link">
             <div className="surface-card p-4 hover:shadow-md transition-shadow cursor-pointer group">
               <div className="w-9 h-9 rounded-[10px] bg-[#1A3550]/8 flex items-center justify-center mb-2.5 group-hover:bg-[#1A3550]/12 transition-colors">
                 <BookOpen size={16} className="text-primary" />
@@ -147,7 +147,7 @@ export default function AppHomePage() {
       {/* Explore CTA */}
       <div className="mt-4">
         <Link
-          href="/app/discover"
+          href="/d/discover"
           className="surface-card p-4 flex items-center justify-between group hover:shadow-md transition-shadow cursor-pointer"
         >
           <div className="flex items-center gap-3">

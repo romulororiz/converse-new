@@ -179,7 +179,7 @@ export default function ChatDetailPage() {
         {/* Compact header */}
         <div className="flex items-center justify-between h-12 px-4 border-b border-border bg-white shrink-0">
           <div className="flex items-center gap-3 min-w-0">
-            <Link href="/app/books" className="p-1 rounded-[6px] hover:bg-surface-2 transition-colors text-muted-foreground hover:text-foreground">
+            <Link href="/d/books" className="p-1 rounded-[6px] hover:bg-surface-2 transition-colors text-muted-foreground hover:text-foreground">
               <ArrowLeft size={16} />
             </Link>
             <div className="w-7 h-9 rounded-[6px] overflow-hidden shrink-0 shadow-sm relative">
