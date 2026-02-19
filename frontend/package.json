@@ -1,7 +1,8 @@
 {
   "name": "frontend",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
-    "start": "node /app/node_modules/next/dist/bin/next dev --port 3000"
+    "start": "cd /app && node node_modules/.bin/next dev --port 3000"
   }
 }
