@@ -9,7 +9,6 @@ import { BookCoverImage } from '@/components/BookCoverImage';
 import { fetchBooks } from '@/lib/services/books';
 import { fetchChats, type ChatListItem } from '@/lib/services/chats';
 import { fetchCurrentProfile } from '@/lib/services/profile';
-import { getBookRating } from '@/lib/hooks/useHighlights';
 import type { Book } from '@/lib/core';
 import type { UserProfile } from '@/lib/core';
 import Link from 'next/link';
