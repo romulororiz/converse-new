@@ -182,9 +182,9 @@ export default function ChatDetailPage() {
             <Link href="/app/books" className="p-1 rounded-[6px] hover:bg-surface-2 transition-colors text-muted-foreground hover:text-foreground">
               <ArrowLeft size={16} />
             </Link>
-            <div className="w-7 h-9 rounded-[6px] overflow-hidden shrink-0 shadow-sm">
+            <div className="w-7 h-9 rounded-[6px] overflow-hidden shrink-0 shadow-sm relative">
               {book?.cover_url ? (
-                <img src={book.cover_url} alt={book.title} className="w-full h-full object-cover" />
+                <Image src={book.cover_url} alt={book.title} fill className="object-cover" sizes="28px" />
               ) : (
                 <div className="w-full h-full bg-primary/10 flex items-center justify-center">
                   <BookOpen size={12} className="text-primary" />
