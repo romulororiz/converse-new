@@ -1,10 +1,10 @@
 @import "tailwindcss";
 @import "@neondatabase/auth/ui/tailwind";
 
-/* ── Warm Premium Dark — Design tokens ── */
+/* ── Warm Cream Light — Design tokens ── */
 @theme {
-  --font-sans: var(--font-inter, ui-sans-serif, system-ui, -apple-system, sans-serif);
-  --font-serif: var(--font-fraunces, "Georgia", "Times New Roman", serif);
+  --font-sans: var(--font-dm-sans, ui-sans-serif, system-ui, -apple-system, sans-serif);
+  --font-serif: var(--font-lora, "Georgia", "Times New Roman", serif);
 
   --color-background: var(--bg);
   --color-foreground: var(--text);
@@ -13,13 +13,13 @@
   --color-popover: var(--surface-1);
   --color-popover-foreground: var(--text);
   --color-primary: var(--accent);
-  --color-primary-foreground: #1A1816;
+  --color-primary-foreground: #FFFFFF;
   --color-secondary: var(--surface-2);
   --color-secondary-foreground: var(--text);
   --color-muted: var(--surface-2);
   --color-muted-foreground: var(--text-muted);
   --color-accent: var(--neo-accent);
-  --color-accent-foreground: #1A1816;
+  --color-accent-foreground: #FFFFFF;
   --color-destructive: var(--danger);
   --color-border: var(--neo-border);
   --color-input: var(--surface-2);
@@ -30,6 +30,8 @@
   --color-danger: var(--neo-danger);
   --color-paper: var(--neo-paper);
   --color-paper-foreground: var(--neo-paper-text);
+  --color-highlight: var(--neo-highlight);
+  --color-highlight-bg: var(--neo-highlight-bg);
 
   --color-surface-1: var(--neo-surface-1);
   --color-surface-2: var(--neo-surface-2);
@@ -38,15 +40,15 @@
   --color-sidebar: var(--neo-surface-1);
   --color-sidebar-foreground: var(--text);
   --color-sidebar-primary: var(--neo-accent);
-  --color-sidebar-primary-foreground: #1A1816;
+  --color-sidebar-primary-foreground: #FFFFFF;
   --color-sidebar-accent: var(--surface-2);
   --color-sidebar-accent-foreground: var(--text);
   --color-sidebar-border: var(--neo-border);
   --color-sidebar-ring: var(--neo-accent);
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05);
   --shadow-glow: 0 0 20px var(--neo-accent-glow);
 
   --radius-sm: 8px;
@@ -57,23 +59,26 @@
 }
 
 :root {
-  --bg: #0F0E0C;
-  --surface-1: #1A1816;
-  --surface-2: #242220;
-  --neo-border: rgba(255, 235, 200, 0.08);
-  --text: rgba(255, 250, 240, 0.92);
-  --text-muted: rgba(255, 250, 240, 0.45);
-  --neo-accent: #E8A838;
-  --neo-accent-hover: #F0B84A;
-  --neo-accent-glow: rgba(232, 168, 56, 0.25);
-  --neo-success: #3BE38C;
-  --neo-warning: #FFCC66;
-  --neo-danger: #FF5C7A;
-  --neo-paper: #FDF6EC;
-  --neo-paper-text: #1A1A1A;
-  --neo-surface-1: #1A1816;
-  --neo-surface-2: #242220;
-  --accent: #E8A838;
+  --bg: #FAF9F6;
+  --surface-1: #FFFFFF;
+  --surface-2: #F5F2ED;
+  --surface-3: #EDE8E1;
+  --neo-border: rgba(0, 0, 0, 0.08);
+  --text: #1C1917;
+  --text-muted: #78716C;
+  --neo-accent: #1A3550;
+  --neo-accent-hover: #163048;
+  --neo-accent-glow: rgba(26, 53, 80, 0.12);
+  --neo-highlight: #C4822A;
+  --neo-highlight-bg: rgba(196, 130, 42, 0.08);
+  --neo-success: #2E7D5E;
+  --neo-warning: #C4822A;
+  --neo-danger: #DC2626;
+  --neo-paper: #FFFBF5;
+  --neo-paper-text: #1C1917;
+  --neo-surface-1: #FFFFFF;
+  --neo-surface-2: #F5F2ED;
+  --accent: #1A3550;
 }
 
 /* ── Base resets ── */
@@ -85,12 +90,6 @@
   body {
     @apply bg-background text-foreground antialiased;
     background-color: var(--bg);
-    background-image: radial-gradient(
-      1200px circle at 30% 10%,
-      rgba(232, 168, 56, 0.04),
-      transparent 55%
-    );
-    background-attachment: fixed;
   }
   a {
     color: inherit;
@@ -104,6 +103,7 @@
     background-color: var(--surface-1);
     border: 1px solid var(--neo-border);
     border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   }
 
   .surface-raised {
@@ -120,15 +120,14 @@
 
   .accent-button {
     background-color: var(--neo-accent);
-    color: #1A1816;
+    color: #FFFFFF;
     font-weight: 600;
     border-radius: 12px;
-    box-shadow: 0 2px 10px var(--neo-accent-glow);
     transition: all 180ms ease-out;
   }
   .accent-button:hover {
     background-color: var(--neo-accent-hover);
-    box-shadow: 0 4px 16px var(--neo-accent-glow);
+    box-shadow: 0 4px 12px var(--neo-accent-glow);
   }
 
   .ghost-button {
@@ -150,33 +149,28 @@
   }
   .outline-button:hover {
     background-color: var(--surface-2);
-    border-color: rgba(255, 235, 200, 0.14);
+    border-color: rgba(0, 0, 0, 0.14);
   }
 
   .hero-gradient {
-    background-image: radial-gradient(
-      1200px circle at 30% 20%,
-      rgba(232, 168, 56, 0.15),
-      transparent 55%
-    );
+    background: radial-gradient(ellipse 100% 80% at 70% 40%, rgba(196, 130, 42, 0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 60% at 20% 60%, rgba(26, 53, 80, 0.04) 0%, transparent 55%);
   }
 
   .cta-gradient {
-    background: linear-gradient(
-      135deg,
-      rgba(232, 168, 56, 0.95),
-      rgba(240, 184, 74, 0.85)
-    );
+    background: linear-gradient(135deg, #1A3550, #1e4165);
   }
 
   .paper-card {
     background-color: var(--neo-paper);
     color: var(--neo-paper-text);
     border-radius: 12px;
+    border: 1px solid rgba(196, 130, 42, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   }
 
   .accent-border-left {
-    border-left: 3px solid var(--neo-accent);
+    border-left: 3px solid var(--neo-highlight);
   }
 
   .glow-accent {
@@ -184,9 +178,106 @@
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #E8A838, #F0B84A, #F5D090);
+    background: linear-gradient(135deg, #1A3550, #2B5882);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .highlight-callout {
+    background-color: var(--neo-highlight-bg);
+    border: 1px solid rgba(196, 130, 42, 0.2);
+    border-radius: 10px;
+    border-left: 3px solid var(--neo-highlight);
+  }
+
+  /* ── Neon Auth Form Overrides ── */
+  .neon-auth-form > div {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .neon-auth-form label {
+    color: #3D3A37 !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+  }
+
+  .neon-auth-form input {
+    background-color: #fff !important;
+    border: 1.5px solid #E0DCD7 !important;
+    border-radius: 10px !important;
+    color: #1A1816 !important;
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+    transition: border-color 0.15s ease !important;
+  }
+
+  .neon-auth-form input::placeholder {
+    color: #A09A94 !important;
+  }
+
+  .neon-auth-form input:focus {
+    border-color: #1A3550 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(26, 53, 80, 0.08) !important;
+  }
+
+  /* Primary submit button */
+  .neon-auth-form button[type="submit"] {
+    background-color: #1A3550 !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    padding: 10px 0 !important;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease !important;
+  }
+
+  .neon-auth-form button[type="submit"]:hover {
+    background-color: #163048 !important;
+    box-shadow: 0 4px 12px rgba(26, 53, 80, 0.15) !important;
+  }
+
+  /* Google / social sign-in button */
+  .neon-auth-form button:not([type="submit"]) {
+    background-color: #fff !important;
+    color: #3D3A37 !important;
+    border: 1.5px solid #E0DCD7 !important;
+    border-radius: 10px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    transition: border-color 0.15s ease, background-color 0.15s ease !important;
+  }
+
+  .neon-auth-form button:not([type="submit"]):hover {
+    background-color: #F5F3F0 !important;
+    border-color: #C5C0BA !important;
+    color: #1A1816 !important;
+  }
+
+  /* Links inside auth form */
+  .neon-auth-form a {
+    color: #1A3550 !important;
+    font-weight: 500 !important;
+  }
+
+  .neon-auth-form a:hover {
+    text-decoration: underline !important;
+  }
+
+  /* Divider text ("Or continue with") */
+  .neon-auth-form hr,
+  .neon-auth-form [role="separator"] {
+    border-color: #E0DCD7 !important;
+  }
+
+  /* General text inside the form */
+  .neon-auth-form p,
+  .neon-auth-form span,
+  .neon-auth-form div {
+    color: inherit;
   }
 }

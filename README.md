@@ -40,6 +40,3 @@ pnpm dev
 - `pnpm start` — run production server
 - `pnpm lint` — run ESLint
 - `pnpm type-check` — run TypeScript checks
-- `pnpm seed:subscription-plans` — seed the `subscription_plans` table with free, premium, and trial (uses `DATABASE_URL` from `.env.local`)
-
-**Neon Console: can't edit tables (padlock / RLS)?** Run the SQL in `scripts/disable-rls-for-console-editing.sql` in Neon's SQL Editor to disable RLS on app tables so you can edit rows in the dashboard. The `user_subscription_status` object is a **view** (read-only); to change subscription data, edit the **profiles** table. To show user name and email in that view, run `scripts/recreate-user-subscription-status-view.sql`.

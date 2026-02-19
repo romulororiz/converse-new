@@ -8,7 +8,7 @@ import { authClient } from '@/lib/auth/client';
  * Uses session state from Neon Auth and retries briefly to absorb
  * transient post-redirect cookie/session propagation delays.
  */
-export default function AuthSync() {
+export function AuthSync() {
   const { data: session, isPending } = authClient.useSession();
   const syncedForId = useRef<string | null>(null);
 

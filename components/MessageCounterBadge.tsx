@@ -51,10 +51,7 @@ export function MessageCounterBadge({
   }
 
   const plan = planOverride ?? messageInfo?.plan ?? 'free';
-  const remaining =
-    remainingOverride !== undefined && remainingOverride !== null
-      ? Number(remainingOverride)
-      : (messageInfo?.remainingMessages ?? 0);
+  const remaining = remainingOverride ?? messageInfo?.remainingMessages ?? 0;
   const isExhausted = remaining === 0 && plan === 'free';
 
   if (variant === 'circle') {
@@ -91,7 +88,7 @@ export function MessageCounterBadge({
       className={`text-xs font-semibold uppercase rounded-full px-3 py-1.5 bg-primary/10 text-primary hover:bg-primary/20 transition-colors ${className ?? ''}`}
       disabled={!onPress}
     >
-      {loading && remainingOverride === null ? '...' : `${remaining} ${label}`}
+      {loading ? '...' : `${remaining} ${label}`}
     </button>
   );
 }
