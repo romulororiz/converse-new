@@ -1,0 +1,7 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "cd /app && node_modules/.bin/next dev -p 3000"
+  }
+}
