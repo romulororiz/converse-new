@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { BookOpen, ArrowRight } from 'lucide-react';
-import { SignedIn, SignedOut } from '@neondatabase/auth/react';
 
 export function PublicShell({ children }: { children: React.ReactNode }) {
   return (
@@ -23,19 +22,12 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
           </nav>
 
           <div className="flex items-center gap-3">
-            <SignedIn>
-              <Link href="/d" className="accent-button h-9 px-4 inline-flex items-center gap-2 text-sm font-medium">
-                Open App <ArrowRight size={14} />
-              </Link>
-            </SignedIn>
-            <SignedOut>
-              <Link href="/auth/sign-in" className="ghost-button h-9 px-4 inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground">
-                Sign in
-              </Link>
-              <Link href="/auth/sign-up" className="accent-button h-9 px-4 inline-flex items-center text-sm font-semibold">
-                Get started
-              </Link>
-            </SignedOut>
+            <Link href="/auth/sign-in" className="ghost-button h-9 px-4 inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground">
+              Sign in
+            </Link>
+            <Link href="/auth/sign-up" className="accent-button h-9 px-4 inline-flex items-center text-sm font-semibold">
+              Get started
+            </Link>
           </div>
         </div>
       </header>
