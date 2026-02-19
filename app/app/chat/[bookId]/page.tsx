@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
-import { Copy, Bookmark, BookmarkCheck, Share2, Check, ArrowUp, BookOpen } from 'lucide-react';
+import { Copy, Bookmark, BookmarkCheck, Share2, Check, ArrowUp, BookOpen, Sparkles, ArrowLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { LoadingDots } from '@/components/LoadingDots';
 import { MessageCounterBadge } from '@/components/MessageCounterBadge';
@@ -12,15 +12,23 @@ import { PremiumPaywallDrawer } from '@/components/PremiumPaywallDrawer';
 import { InsightsPanel } from '@/components/InsightsPanel';
 import { ShareCard } from '@/components/ShareCard';
 import { Tabs } from '@/components/ui/Tabs';
+import { useHighlights } from '@/lib/hooks/useHighlights';
 import type { Book } from '@/lib/core';
 import { fetchBookChat, sendBookMessage, type ChatMessage } from '@/lib/services/chats';
 import { upgradeSubscription } from '@/lib/services/subscription';
+import Link from 'next/link';
 
 interface Message {
   id: string;
   content: string;
   role: 'user' | 'assistant';
   created_at: string;
+}
+
+/** Extract first bold phrase from markdown to use as key insight */
+function extractKeyInsight(content: string): string | null {
+  const match = content.match(/\*\*([^*]{15,120})\*\*/);
+  return match ? match[1] : null;
 }
 
 export default function ChatDetailPage() {
@@ -36,12 +44,14 @@ export default function ChatDetailPage() {
   const [remainingMessages, setRemainingMessages] = useState<number | null>(null);
   const [currentPlan, setCurrentPlan] = useState<'free' | 'premium' | 'trial' | null>(null);
   const [apiRateLimitedUntil, setApiRateLimitedUntil] = useState<Date | null>(null);
-  const [highlights, setHighlights] = useState<string[]>([]);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [showShareCard, setShowShareCard] = useState(false);
   const [shareQuote, setShareQuote] = useState('');
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const { save: saveHighlight, remove: removeHighlight, isHighlighted, forBook } = useHighlights();
+  const bookHighlights = forBook(bookId ?? '');
 
   const isBlocked = remainingMessages === 0 && currentPlan === 'free';
   const bookInitial = book?.title?.[0]?.toUpperCase() ?? 'B';
@@ -103,13 +113,9 @@ export default function ChatDetailPage() {
         { id: response.aiMessage.id, content: response.aiMessage.content, role: response.aiMessage.role, created_at: response.aiMessage.created_at },
       ]);
       setRemainingMessages(response.remainingMessages);
-      if (response.plan === 'free' || response.plan === 'premium' || response.plan === 'trial') {
-        setCurrentPlan(response.plan);
-      }
+      if (response.plan === 'free' || response.plan === 'premium' || response.plan === 'trial') setCurrentPlan(response.plan);
       setBadgeRefreshKey((prev) => prev + 1);
-      if (response.remainingMessages === 0 && response.plan === 'free') {
-        setTimeout(() => setShowPaywall(true), 600);
-      }
+      if (response.remainingMessages === 0 && response.plan === 'free') setTimeout(() => setShowPaywall(true), 600);
     } catch (error) {
       setMessages((prev) => prev.slice(0, -1));
       const details = error instanceof Error && 'details' in error
@@ -121,8 +127,7 @@ export default function ChatDetailPage() {
         return;
       }
       setMessages((prev) => [...prev, {
-        id: 'error-' + Date.now(),
-        content: error instanceof Error ? error.message : 'Error sending message',
+        id: 'error-' + Date.now(), content: error instanceof Error ? error.message : 'Error sending message',
         role: 'assistant', created_at: new Date().toISOString(),
       }]);
     } finally { setSending(false); }
@@ -140,14 +145,20 @@ export default function ChatDetailPage() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const toggleHighlight = (content: string) => {
-    setHighlights((prev) =>
-      prev.includes(content) ? prev.filter((h) => h !== content) : [...prev, content]
-    );
-  };
-
-  const handleRemoveHighlight = (index: number) => {
-    setHighlights((prev) => prev.filter((_, i) => i !== index));
+  const handleToggleHighlight = (message: Message) => {
+    if (!book) return;
+    if (isHighlighted(message.content, bookId ?? '')) {
+      const h = bookHighlights.find((x) => x.content === message.content);
+      if (h) removeHighlight(h.id);
+    } else {
+      saveHighlight({
+        bookId: bookId ?? '',
+        bookTitle: book.title,
+        bookAuthor: book.author ?? undefined,
+        bookCover: book.cover_url ?? undefined,
+        content: message.content,
+      });
+    }
   };
 
   const handleShare = (content: string) => { setShareQuote(content); setShowShareCard(true); };
@@ -155,21 +166,34 @@ export default function ChatDetailPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-[60vh]">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent" />
       </div>
     );
   }
 
   return (
-    <div className="flex h-[calc(100vh-56px)]">
+    <div className="flex h-[calc(100vh-56px)] bg-[#FAF9F6]">
       {/* Main chat area */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Compact single-line header */}
-        <div className="flex items-center justify-between h-10 px-4 border-b border-border shrink-0">
-          <div className="flex items-center gap-2 min-w-0">
-            <BookOpen size={14} className="text-primary shrink-0" />
-            <span className="font-medium text-sm truncate">{book?.title ?? 'Book'}</span>
-            <span className="text-xs text-muted-foreground truncate hidden sm:inline">{book?.author ?? ''}</span>
+        {/* Compact header */}
+        <div className="flex items-center justify-between h-12 px-4 border-b border-border bg-white shrink-0">
+          <div className="flex items-center gap-3 min-w-0">
+            <Link href="/app/books" className="p-1 rounded-[6px] hover:bg-surface-2 transition-colors text-muted-foreground hover:text-foreground">
+              <ArrowLeft size={16} />
+            </Link>
+            <div className="w-7 h-9 rounded-[6px] overflow-hidden shrink-0 shadow-sm">
+              {book?.cover_url ? (
+                <img src={book.cover_url} alt={book.title} className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full bg-primary/10 flex items-center justify-center">
+                  <BookOpen size={12} className="text-primary" />
+                </div>
+              )}
+            </div>
+            <div className="min-w-0">
+              <p className="font-semibold text-sm truncate text-foreground leading-tight">{book?.title ?? 'Book'}</p>
+              <p className="text-[11px] text-muted-foreground truncate">{book?.author ?? ''}</p>
+            </div>
           </div>
           <MessageCounterBadge
             variant="pill"
@@ -181,7 +205,7 @@ export default function ChatDetailPage() {
         </div>
 
         {/* Mobile tabs */}
-        <div className="lg:hidden flex justify-center py-1.5 border-b border-border shrink-0">
+        <div className="lg:hidden flex justify-center py-1.5 border-b border-border bg-white shrink-0">
           <Tabs tabs={[{ id: 'chat', label: 'Chat' }, { id: 'insights', label: 'Insights' }]} activeTab={activeTab} onChange={setActiveTab} />
         </div>
 
@@ -189,40 +213,43 @@ export default function ChatDetailPage() {
         {activeTab === 'chat' ? (
           <div className="relative flex-1 min-h-0">
             <div className="h-full overflow-y-auto">
-              <div className="max-w-[720px] mx-auto space-y-6 pb-4 pt-6 px-4">
+              <div className="max-w-[720px] mx-auto space-y-5 pb-4 pt-6 px-4">
                 {messages.length === 0 ? (
-                  <div className="flex justify-center pt-20">
+                  <div className="flex justify-center pt-16">
                     <div className="text-center">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                        <span className="text-primary font-bold text-lg">{bookInitial}</span>
+                      <div className="w-14 h-14 rounded-full bg-primary/8 flex items-center justify-center mx-auto mb-3 border border-primary/10">
+                        <span className="text-primary font-bold text-xl">{bookInitial}</span>
                       </div>
-                      <p className="text-muted-foreground text-sm">Ask {book?.title ?? 'this book'} anything</p>
+                      <p className="font-semibold text-foreground mb-1">Ask {book?.title ?? 'this book'} anything</p>
+                      <p className="text-sm text-muted-foreground max-w-xs">Start a conversation to explore ideas, themes, and insights from this book.</p>
                     </div>
                   </div>
                 ) : (
                   messages.map((message, index) => {
                     const isUser = message.role === 'user';
-                    const isSaved = highlights.includes(message.content);
+                    const highlighted = isHighlighted(message.content, bookId ?? '');
+                    const keyInsight = !isUser ? extractKeyInsight(message.content) : null;
                     return (
                       <motion.div
                         key={message.id}
                         initial={index === messages.length - 1 ? { opacity: 0, y: 8 } : false}
                         animate={{ opacity: 1, y: 0 }}
                         className="group"
+                        data-testid={`message-${message.id}`}
                       >
                         {isUser ? (
                           <div className="flex justify-end">
-                            <div className="max-w-[75%] bg-primary text-primary-foreground px-4 py-2.5 rounded-2xl rounded-br-md text-sm leading-relaxed">
+                            <div className="max-w-[75%] bg-primary text-white px-4 py-2.5 rounded-2xl rounded-br-sm text-sm leading-relaxed shadow-sm">
                               {message.content}
                             </div>
                           </div>
                         ) : (
                           <div className="flex gap-3">
-                            <div className="w-6 h-6 rounded-full bg-primary/12 text-primary text-[11px] font-bold flex items-center justify-center shrink-0 mt-1">
+                            <div className="w-7 h-7 rounded-full bg-primary/10 text-primary text-[11px] font-bold flex items-center justify-center shrink-0 mt-1 border border-primary/10">
                               {bookInitial}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="prose-chat text-sm leading-[1.7] text-foreground/90">
+                              <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 border border-border shadow-sm text-sm leading-[1.75] text-foreground/90 accent-border-left">
                                 <ReactMarkdown
                                   components={{
                                     p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
@@ -230,25 +257,41 @@ export default function ChatDetailPage() {
                                     ol: ({ children }) => <ol className="list-decimal pl-5 mb-3 space-y-1.5">{children}</ol>,
                                     ul: ({ children }) => <ul className="list-disc pl-5 mb-3 space-y-1.5">{children}</ul>,
                                     li: ({ children }) => <li>{children}</li>,
-                                    h1: ({ children }) => <h3 className="text-base font-semibold text-foreground mt-4 mb-2">{children}</h3>,
-                                    h2: ({ children }) => <h3 className="text-base font-semibold text-foreground mt-4 mb-2">{children}</h3>,
-                                    h3: ({ children }) => <h4 className="text-sm font-semibold text-foreground mt-3 mb-1.5">{children}</h4>,
+                                    h1: ({ children }) => <h3 className="text-base font-bold text-foreground mt-4 mb-2">{children}</h3>,
+                                    h2: ({ children }) => <h3 className="text-base font-bold text-foreground mt-4 mb-2">{children}</h3>,
+                                    h3: ({ children }) => <h4 className="text-sm font-bold text-foreground mt-3 mb-1.5">{children}</h4>,
                                     code: ({ children }) => <code className="bg-surface-2 px-1.5 py-0.5 rounded text-xs font-mono">{children}</code>,
-                                    blockquote: ({ children }) => <blockquote className="border-l-2 border-primary/30 pl-3 italic text-foreground/70 my-3">{children}</blockquote>,
+                                    blockquote: ({ children }) => <blockquote className="border-l-2 border-[#C4822A]/40 pl-3 italic text-foreground/70 my-3">{children}</blockquote>,
                                   }}
                                 >
                                   {message.content}
                                 </ReactMarkdown>
                               </div>
+
+                              {/* Key Insight callout */}
+                              {keyInsight && (
+                                <div className="highlight-callout px-4 py-3 mt-2">
+                                  <p className="text-[11px] font-bold text-[#C4822A] mb-1.5 flex items-center gap-1.5 uppercase tracking-wide">
+                                    <Sparkles size={11} /> Key Insight
+                                  </p>
+                                  <p className="text-sm text-foreground/90 font-medium leading-relaxed">{keyInsight}</p>
+                                </div>
+                              )}
+
                               {/* Hover-reveal actions */}
                               <div className="flex items-center gap-1 mt-1.5 -ml-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onClick={() => handleCopy(message.id, message.content)} className="p-1 rounded-md text-muted-foreground/60 hover:text-foreground hover:bg-surface-2 transition-colors" title="Copy">
+                                <button onClick={() => handleCopy(message.id, message.content)} className="p-1.5 rounded-[8px] text-muted-foreground/60 hover:text-foreground hover:bg-surface-2 transition-colors" title="Copy">
                                   {copiedId === message.id ? <Check size={12} /> : <Copy size={12} />}
                                 </button>
-                                <button onClick={() => toggleHighlight(message.content)} className={cn('p-1 rounded-md transition-colors', isSaved ? 'text-primary' : 'text-muted-foreground/60 hover:text-foreground hover:bg-surface-2')} title={isSaved ? 'Remove from highlights' : 'Save'}>
-                                  {isSaved ? <BookmarkCheck size={12} /> : <Bookmark size={12} />}
+                                <button
+                                  onClick={() => handleToggleHighlight(message)}
+                                  data-testid={`bookmark-btn-${message.id}`}
+                                  className={cn('p-1.5 rounded-[8px] transition-colors', highlighted ? 'text-[#C4822A]' : 'text-muted-foreground/60 hover:text-foreground hover:bg-surface-2')}
+                                  title={highlighted ? 'Remove from highlights' : 'Save highlight'}
+                                >
+                                  {highlighted ? <BookmarkCheck size={12} /> : <Bookmark size={12} />}
                                 </button>
-                                <button onClick={() => handleShare(message.content)} className="p-1 rounded-md text-muted-foreground/60 hover:text-foreground hover:bg-surface-2 transition-colors" title="Share">
+                                <button onClick={() => handleShare(message.content)} className="p-1.5 rounded-[8px] text-muted-foreground/60 hover:text-foreground hover:bg-surface-2 transition-colors" title="Share">
                                   <Share2 size={12} />
                                 </button>
                               </div>
@@ -261,10 +304,10 @@ export default function ChatDetailPage() {
                 )}
                 {sending && (
                   <div className="flex gap-3">
-                    <div className="w-6 h-6 rounded-full bg-primary/12 text-primary text-[11px] font-bold flex items-center justify-center shrink-0 mt-1">
+                    <div className="w-7 h-7 rounded-full bg-primary/10 text-primary text-[11px] font-bold flex items-center justify-center shrink-0 mt-1 border border-primary/10">
                       {bookInitial}
                     </div>
-                    <div className="text-sm text-muted-foreground flex items-center gap-2 pt-1">
+                    <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 border border-border shadow-sm text-sm text-muted-foreground flex items-center gap-2">
                       <LoadingDots />
                     </div>
                   </div>
@@ -274,17 +317,24 @@ export default function ChatDetailPage() {
             </div>
           </div>
         ) : (
-          <div className="flex-1 min-h-0 overflow-y-auto p-4 lg:hidden">
-            <InsightsPanel highlights={highlights} onPrompt={(p) => { setActiveTab('chat'); handleSendMessage(p); }} onShareInsight={() => { const last = [...messages].reverse().find((m) => m.role === 'assistant'); if (last) handleShare(last.content); }} onRemoveHighlight={handleRemoveHighlight} />
+          <div className="flex-1 min-h-0 overflow-y-auto p-4 lg:hidden bg-[#FAF9F6]">
+            <InsightsPanel
+              highlights={bookHighlights.map((h) => h.content)}
+              onPrompt={(p) => { setActiveTab('chat'); handleSendMessage(p); }}
+              onShareInsight={() => { const last = [...messages].reverse().find((m) => m.role === 'assistant'); if (last) handleShare(last.content); }}
+              onRemoveHighlight={(index) => { const h = bookHighlights[index]; if (h) removeHighlight(h.id); }}
+            />
           </div>
         )}
 
         {/* Composer */}
         {activeTab === 'chat' && (
-          <div className="shrink-0 border-t border-border bg-background/50 px-4 py-3">
+          <div className="shrink-0 border-t border-border bg-white px-4 py-3">
             {isBlocked && (
               <div className="max-w-[720px] mx-auto mb-2 text-center">
-                <p className="text-xs text-danger">You&apos;ve used all free messages today. <button onClick={() => setShowPaywall(true)} className="text-primary underline cursor-pointer">Upgrade for unlimited.</button></p>
+                <p className="text-xs text-danger">You&apos;ve used all free messages today.{' '}
+                  <button onClick={() => setShowPaywall(true)} className="text-primary underline cursor-pointer font-medium">Upgrade for unlimited.</button>
+                </p>
               </div>
             )}
             <div className="max-w-[720px] mx-auto relative">
@@ -294,14 +344,16 @@ export default function ChatDetailPage() {
                 value={newMessage}
                 onChange={(e) => { setNewMessage(e.target.value); autoResize(); }}
                 onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSendMessage(); } }}
-                placeholder={isBlocked ? 'Upgrade to continue chatting...' : 'Ask this book anything...'}
+                placeholder={isBlocked ? 'Upgrade to continue chatting...' : `Ask ${book?.title ?? 'this book'} anything...`}
                 disabled={isBlocked}
-                className="w-full pl-4 pr-12 py-3 rounded-xl bg-surface-2/40 border border-border text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-primary/30 transition-colors resize-none disabled:opacity-50"
+                data-testid="chat-input"
+                className="w-full pl-4 pr-12 py-3 rounded-xl bg-surface-2 border border-border text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-primary/30 transition-colors resize-none disabled:opacity-50"
                 style={{ minHeight: '44px', maxHeight: '160px' }}
               />
               <button
                 onClick={() => handleSendMessage()}
                 disabled={sending || remainingApiSeconds > 0 || isBlocked || !newMessage.trim()}
+                data-testid="send-btn"
                 className="absolute right-2 bottom-2 w-8 h-8 rounded-lg accent-button flex items-center justify-center transition disabled:opacity-30 cursor-pointer"
               >
                 {remainingApiSeconds > 0 ? (
@@ -316,15 +368,20 @@ export default function ChatDetailPage() {
       </div>
 
       {/* Desktop insights panel */}
-      <aside className="hidden lg:flex flex-col w-[280px] shrink-0 bg-surface-1/30 py-4 px-4 overflow-hidden">
+      <aside className="hidden lg:flex flex-col w-[280px] shrink-0 bg-white border-l border-border py-4 px-4 overflow-hidden">
         <div className="flex-1 overflow-y-auto">
-          <InsightsPanel highlights={highlights} onPrompt={(p) => handleSendMessage(p)} onShareInsight={() => { const last = [...messages].reverse().find((m) => m.role === 'assistant'); if (last) handleShare(last.content); }} onRemoveHighlight={handleRemoveHighlight} />
+          <InsightsPanel
+            highlights={bookHighlights.map((h) => h.content)}
+            onPrompt={(p) => handleSendMessage(p)}
+            onShareInsight={() => { const last = [...messages].reverse().find((m) => m.role === 'assistant'); if (last) handleShare(last.content); }}
+            onRemoveHighlight={(index) => { const h = bookHighlights[index]; if (h) removeHighlight(h.id); }}
+          />
         </div>
       </aside>
 
       {/* Share card modal */}
       {showShareCard && (
-        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowShareCard(false)}>
+        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setShowShareCard(false)}>
           <div onClick={(e) => e.stopPropagation()} className="mx-4 max-h-[80vh] overflow-y-auto">
             <ShareCard bookTitle={book?.title ?? 'Book'} bookAuthor={book?.author} bookCover={book?.cover_url} quote={shareQuote} />
             <button onClick={() => setShowShareCard(false)} className="outline-button h-9 px-4 text-sm font-medium mt-4 mx-auto flex">Close</button>
