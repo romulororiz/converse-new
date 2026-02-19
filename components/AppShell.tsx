@@ -28,12 +28,12 @@ import type { Book } from '@/lib/core';
 import { BookCoverImage } from '@/components/BookCoverImage';
 
 const navItems = [
-  { name: 'Home', href: '/app', icon: Home },
-  { name: 'Discover', href: '/app/discover', icon: Compass },
-  { name: 'Library', href: '/app/books', icon: BookOpen },
-  { name: 'Chats', href: '/app/chats', icon: MessageSquare },
-  { name: 'Highlights', href: '/app/highlights', icon: BookMarked },
-  { name: 'Goals', href: '/app/goals', icon: Target },
+  { name: 'Home', href: '/d', icon: Home },
+  { name: 'Discover', href: '/d/discover', icon: Compass },
+  { name: 'Library', href: '/d/books', icon: BookOpen },
+  { name: 'Chats', href: '/d/chats', icon: MessageSquare },
+  { name: 'Highlights', href: '/d/highlights', icon: BookMarked },
+  { name: 'Goals', href: '/d/goals', icon: Target },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
