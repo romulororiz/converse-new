@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookMarked, Share2, Trash2, BookOpen, Sparkles } from 'lucide-react';
 import { useHighlights } from '@/lib/hooks/useHighlights';
