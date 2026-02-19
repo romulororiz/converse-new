@@ -1,18 +1,5 @@
 import type { Metadata } from 'next';
-import { DM_Sans, Lora } from 'next/font/google';
 import './globals.css';
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
-  display: 'swap',
-});
-
-const lora = Lora({
-  subsets: ['latin'],
-  variable: '--font-lora',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: 'ConversAI',
@@ -21,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${lora.variable}`}>
-      <body className="min-h-screen bg-background text-foreground font-sans antialiased">
+    <html lang="en">
+      <body>
         {children}
       </body>
     </html>
