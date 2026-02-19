@@ -13,13 +13,26 @@ NEXTJS_URL = "http://localhost:3000"
 @app.api_route("/api/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"])
 async def proxy_to_nextjs(request: Request, path: str):
     url = f"{NEXTJS_URL}/api/{path}"
-    query = str(request.query_params)
-    logger.info(f"PROXY {request.method} /api/{path}{'?' + query if query else ''}")
+    logger.info(f"PROXY {request.method} /api/{path}")
 
+    # Forward headers, preserving original host info for auth callbacks
     fwd_headers = {}
+    original_host = None
     for key, value in request.headers.items():
-        if key.lower() not in ("host", "content-length"):
-            fwd_headers[key] = value
+        lower = key.lower()
+        if lower == "host":
+            original_host = value
+            continue
+        if lower == "content-length":
+            continue
+        fwd_headers[key] = value
+
+    # Set forwarded headers so Next.js knows the real origin
+    if original_host:
+        fwd_headers["x-forwarded-host"] = original_host
+        fwd_headers["host"] = original_host
+    if "x-forwarded-proto" not in fwd_headers:
+        fwd_headers["x-forwarded-proto"] = "https"
 
     body = await request.body()
 
