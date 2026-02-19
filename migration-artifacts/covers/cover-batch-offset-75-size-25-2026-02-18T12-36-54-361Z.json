@@ -1,0 +1,669 @@
+{
+  "executedAt": "2026-02-18T12:36:42.254Z",
+  "mode": "apply",
+  "offset": 75,
+  "batchSize": 25,
+  "totalInBatch": 20,
+  "updated": [
+    {
+      "id": "7a33b62f-3df3-4bfd-8797-ac592cf7656d",
+      "title": "Thus Spoke Zarathustra",
+      "author": "Friedrich Nietzsche",
+      "oldCoverUrl": "https://covers.openlibrary.org/b/id/1017466-L.jpg",
+      "newCoverUrl": "https://covers.openlibrary.org/b/id/11161281-L.jpg",
+      "score": 95,
+      "existingConfidence": 80,
+      "openLibraryKey": "/works/OL24528372W"
+    }
+  ],
+  "skippedNoMatch": [],
+  "skippedUncertain": [
+    {
+      "id": "957f0e40-a42f-4314-97db-6701fa8e3a59",
+      "title": "The Strange Case of Dr. Jekyll and Mr. Hyde",
+      "author": "Robert Louis Stevenson",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/295773-L.jpg",
+      "topCandidate": {
+        "title": "The Strange Case of Dr. Jekyll and Mr. Hyde",
+        "author": [
+          "Robert Louis Stevenson"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/295773-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The Strange Case of Dr. Jekyll and Mr. Hyde",
+        "author": [
+          "Robert Louis Stevenson"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/103084-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "37260b7b-a5f0-49b5-94db-e4522d5e74ba",
+      "title": "The Tenant of Wildfell Hall",
+      "author": "Anne BrontÃ«",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/12721943-L.jpg",
+      "topCandidate": {
+        "title": "The Bronte Sisters (Jane Eyre / Shirley / Tenant of Wildfell Hall / Wuthering Heights)",
+        "author": [
+          "Charlotte Brontë",
+          "Emily Brontë",
+          "Anne Brontë"
+        ],
+        "score": 28,
+        "url": "https://covers.openlibrary.org/b/id/14554235-L.jpg",
+        "matchDetails": {
+          "score": 28,
+          "exactTitle": false,
+          "exactAuthor": false,
+          "titleOverlap": 0.4166666666666667,
+          "authorOverlap": 0.25
+        }
+      },
+      "secondCandidate": {
+        "title": "The Brontë Sisters (Agnes Grey / Jane Eyre / Tenant of Wildfell Hall / Villette / Wuthering Heights)",
+        "author": [
+          "Anne Brontë",
+          "Charlotte Brontë",
+          "Emily Brontë"
+        ],
+        "score": 25,
+        "url": "https://covers.openlibrary.org/b/id/12721943-L.jpg",
+        "matchDetails": {
+          "score": 25,
+          "exactTitle": false,
+          "exactAuthor": false,
+          "titleOverlap": 0.35714285714285715,
+          "authorOverlap": 0.25
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "e8794295-ce4f-4561-b7a5-128b0362ae44",
+      "title": "The Three Musketeers",
+      "author": "Alexandre Dumas",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/14564075-L.jpg",
+      "topCandidate": {
+        "title": "The three musketeers [adaptation]",
+        "author": [
+          "Alexandre Dumas"
+        ],
+        "score": 66,
+        "url": "https://covers.openlibrary.org/b/id/14564075-L.jpg",
+        "matchDetails": {
+          "score": 66,
+          "exactTitle": false,
+          "exactAuthor": true,
+          "titleOverlap": 0.75,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The three musketeers [adaptation]",
+        "author": [
+          "Alexandre Dumas"
+        ],
+        "score": 66,
+        "url": "https://covers.openlibrary.org/b/id/10589435-L.jpg",
+        "matchDetails": {
+          "score": 66,
+          "exactTitle": false,
+          "exactAuthor": true,
+          "titleOverlap": 0.75,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "ee998999-b761-4336-87e0-54a52a50ec3f",
+      "title": "The Time Machine",
+      "author": "H.G. Wells",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/9009316-L.jpg",
+      "topCandidate": {
+        "title": "The Time Machine",
+        "author": [
+          "H. G. Wells"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/9009316-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The Time Machine",
+        "author": [
+          "H. G. Wells"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/12549511-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "8dd0d7ae-7976-45f3-842b-e0067cb8ea51",
+      "title": "The Turn of the Screw",
+      "author": "Henry James",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/181493-L.jpg",
+      "topCandidate": {
+        "title": "The Turn of the Screw",
+        "author": [
+          "Henry James"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/181493-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The Turn of the Screw",
+        "author": [
+          "Henry James"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/12343039-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "74c38614-094a-40ac-8379-d4e35eca3153",
+      "title": "The Vampyre",
+      "author": "John Polidori",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/4871002-L.jpg",
+      "topCandidate": {
+        "title": "The Vampyre",
+        "author": [
+          "John William Polidori"
+        ],
+        "score": 83,
+        "url": "https://covers.openlibrary.org/b/id/4871002-L.jpg",
+        "matchDetails": {
+          "score": 83,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0.6666666666666666
+        }
+      },
+      "secondCandidate": {
+        "title": "Vampyre, The",
+        "author": [
+          "John William Polidori",
+          "Emmett Casey"
+        ],
+        "score": 63,
+        "url": "https://covers.openlibrary.org/b/id/11272846-L.jpg",
+        "matchDetails": {
+          "score": 63,
+          "exactTitle": false,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0.4
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "8089c587-0c87-4bd6-9d0a-8761e2a5ac06",
+      "title": "The Wind in the Willows",
+      "author": "Kenneth Grahame",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/13335427-L.jpg",
+      "topCandidate": {
+        "title": "The Wind in the Willows",
+        "author": [
+          "Kenneth Grahame"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/13335427-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The Wind in the Willows",
+        "author": [
+          "Kenneth Grahame"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/14920876-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "f5c67798-2a42-4e56-a46a-6dd4135a9e8f",
+      "title": "The Woman in White",
+      "author": "Wilkie Collins",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/4684227-L.jpg",
+      "topCandidate": {
+        "title": "The Woman in White",
+        "author": [
+          "Wilkie Collins",
+          "Yordi Abreu",
+          "Paul-Émile Daurand-Forgues",
+          "Éditiond CdBF"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/4684227-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 0.2
+        }
+      },
+      "secondCandidate": {
+        "title": "The Woman in White",
+        "author": [
+          "Wilkie Collins",
+          "John McLenan"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/14896636-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 0.5
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "c12e85ee-dec8-4578-ba55-184f5f389d44",
+      "title": "The Wonderful Wizard of Oz",
+      "author": "L. Frank Baum",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/552443-L.jpg",
+      "topCandidate": {
+        "title": "The Wonderful Wizard of Oz",
+        "author": [
+          "L. Frank Baum"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/552443-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "The Wonderful Wizard of Oz",
+        "author": [
+          "Roland Mann",
+          "L. Frank Baum"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/6714466-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 0.6
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "1dffb06c-bc89-4882-b4fb-78dd520b84e4",
+      "title": "Treasure Island",
+      "author": "Robert Louis Stevenson",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/13859660-L.jpg",
+      "topCandidate": {
+        "title": "Treasure Island",
+        "author": [
+          "Robert Louis Stevenson"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/13859660-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "Treasure Island",
+        "author": [
+          "Robert Louis Stevenson",
+          "Jim Seward"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/13178250-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 0.6
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "7bcc29d3-bb4a-4329-8b75-76f71c3c14fe",
+      "title": "Utopia",
+      "author": "Thomas More",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/7222976-L.jpg",
+      "topCandidate": {
+        "title": "Utopia",
+        "author": [
+          "Thomas More"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/7222976-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "Utopia",
+        "author": [
+          "Thomas More"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/13182727-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "e7458aa6-429d-4829-8144-2fa1c336be55",
+      "title": "Vanity Fair",
+      "author": "William Makepeace Thackeray",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/417329-L.jpg",
+      "topCandidate": {
+        "title": "Vanity Fair",
+        "author": [
+          "William Makepeace Thackeray"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/417329-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "Vanity fair",
+        "author": [
+          "William Makepeace Thackeray"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/14909295-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "c2e14c4b-cf56-4c53-b771-1fbd0aa61d8d",
+      "title": "Villette",
+      "author": "Charlotte BrontÃ«",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/5737854-L.jpg",
+      "topCandidate": {
+        "title": "Bronte Sisters (Villette / Wuthering Heights)",
+        "author": [
+          "Emily Brontë",
+          "Charlotte Brontë"
+        ],
+        "score": 18,
+        "url": "https://covers.openlibrary.org/b/id/14834508-L.jpg",
+        "matchDetails": {
+          "score": 18,
+          "exactTitle": false,
+          "exactAuthor": false,
+          "titleOverlap": 0.2,
+          "authorOverlap": 0.3333333333333333
+        }
+      },
+      "secondCandidate": {
+        "title": "Jane Eyre / Wuthering Heights / Shirley / Villette",
+        "author": [
+          "Charlotte Brontë",
+          "Emily Brontë"
+        ],
+        "score": 16,
+        "url": "https://covers.openlibrary.org/b/id/13467787-L.jpg",
+        "matchDetails": {
+          "score": 16,
+          "exactTitle": false,
+          "exactAuthor": false,
+          "titleOverlap": 0.16666666666666666,
+          "authorOverlap": 0.3333333333333333
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "8d298400-7fc6-4afc-b8f7-c2ceb058111c",
+      "title": "War and Peace",
+      "author": "Leo Tolstoy",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/12621906-L.jpg",
+      "topCandidate": {
+        "title": "War and Peace",
+        "author": [
+          "Tolstoy, Leo, graf, 1828-1910"
+        ],
+        "score": 78,
+        "url": "https://covers.openlibrary.org/b/id/14910134-L.jpg",
+        "matchDetails": {
+          "score": 78,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0.4
+        }
+      },
+      "secondCandidate": {
+        "title": "War and Peace",
+        "author": [
+          "Tolstoy, Leo, graf, 1828-1910"
+        ],
+        "score": 78,
+        "url": "https://covers.openlibrary.org/b/id/12621906-L.jpg",
+        "matchDetails": {
+          "score": 78,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0.4
+        }
+      },
+      "reason": "below strict threshold"
+    },
+    {
+      "id": "5a019987-b5a0-4774-90e6-fb4da75e3597",
+      "title": "White Fang",
+      "author": "Jack London",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/8236920-L.jpg",
+      "topCandidate": {
+        "title": "White Fang",
+        "author": [
+          "Jack London"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/8236920-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 1
+        }
+      },
+      "secondCandidate": {
+        "title": "White Fang",
+        "author": [
+          "Malvina G. Vogel",
+          "Jack London"
+        ],
+        "score": 95,
+        "url": "https://covers.openlibrary.org/b/id/6876498-L.jpg",
+        "matchDetails": {
+          "score": 95,
+          "exactTitle": true,
+          "exactAuthor": true,
+          "titleOverlap": 1,
+          "authorOverlap": 0.4
+        }
+      },
+      "reason": "ambiguous top candidates"
+    },
+    {
+      "id": "0d732ede-f58e-4c3c-8144-04ff29113fe2",
+      "title": "Wuthering Heights",
+      "author": "Emily BrontÃ«",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/12818862-L.jpg",
+      "topCandidate": {
+        "title": "Wuthering Heights",
+        "author": [
+          "Emily Brontë"
+        ],
+        "score": 80,
+        "url": "https://covers.openlibrary.org/b/id/12818862-L.jpg",
+        "matchDetails": {
+          "score": 80,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0.5
+        }
+      },
+      "secondCandidate": {
+        "title": "Wuthering Heights",
+        "author": [
+          "Emily Brontë",
+          "Collins GCSE",
+          "Maria Cairney"
+        ],
+        "score": 73,
+        "url": "https://covers.openlibrary.org/b/id/14750745-L.jpg",
+        "matchDetails": {
+          "score": 73,
+          "exactTitle": true,
+          "exactAuthor": false,
+          "titleOverlap": 1,
+          "authorOverlap": 0.16666666666666666
+        }
+      },
+      "reason": "below strict threshold"
+    }
+  ],
+  "unchanged": [
+    {
+      "id": "ab822c53-b1aa-45ba-bce9-c7230560ee45",
+      "title": "The War of the Worlds",
+      "author": "H.G. Wells",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/36314-L.jpg",
+      "candidateUrl": "https://covers.openlibrary.org/b/id/36314-L.jpg",
+      "candidateScore": 95,
+      "existingConfidence": 80
+    },
+    {
+      "id": "a35e8dab-1eaf-4cba-876a-419fa830b96a",
+      "title": "Through the Looking-Glass",
+      "author": "Lewis Carroll",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/11272464-L.jpg",
+      "candidateUrl": "https://covers.openlibrary.org/b/id/11272464-L.jpg",
+      "candidateScore": 95,
+      "existingConfidence": 80
+    },
+    {
+      "id": "d0c62bdb-5bc1-4a72-8246-80d4042e5f20",
+      "title": "Walden",
+      "author": "Henry David Thoreau",
+      "currentCoverUrl": "https://covers.openlibrary.org/b/id/11248037-L.jpg",
+      "candidateUrl": "https://covers.openlibrary.org/b/id/11248037-L.jpg",
+      "candidateScore": 95,
+      "existingConfidence": 80
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "mode": "apply",
+    "totalInBatch": 20,
+    "updatedCount": 1,
+    "unchangedCount": 3,
+    "skippedNoMatchCount": 0,
+    "skippedUncertainCount": 16,
+    "errorsCount": 0
+  }
+}
