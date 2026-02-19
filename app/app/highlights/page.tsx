@@ -67,9 +67,9 @@ export default function HighlightsPage() {
               >
                 {/* Book info */}
                 <div className="flex items-center gap-2.5 mb-3 pb-3 border-b border-border">
-                  <div className="w-8 h-11 rounded-[6px] overflow-hidden shrink-0 shadow-sm">
+                  <div className="w-8 h-11 rounded-[6px] overflow-hidden shrink-0 shadow-sm relative">
                     {h.bookCover ? (
-                      <img src={h.bookCover} alt={h.bookTitle} className="w-full h-full object-cover" />
+                      <Image src={h.bookCover} alt={h.bookTitle} fill className="object-cover" sizes="32px" />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-primary/20 to-surface-2 flex items-center justify-center">
                         <Sparkles size={10} className="text-primary/50" />
