@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { BookOpen, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import converseLogo from '@/lib/assets/converse-logo-nobg.png';
 
 export function PublicShell({ children }: { children: React.ReactNode }) {
   return (
@@ -9,10 +10,8 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-50 border-b border-border bg-white/90 backdrop-blur-sm">
         <div className="mx-auto max-w-[1200px] px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link href="/" className="inline-flex items-center gap-2.5 font-bold tracking-tight text-lg">
-            <span className="w-8 h-8 rounded-[10px] bg-primary flex items-center justify-center">
-              <BookOpen size={15} className="text-white" />
-            </span>
-            <span className="text-foreground">ConversAI</span>
+            <Image src={converseLogo} alt="Converse logo" width={30} height={30} className="shrink-0" />
+            <span className="text-[#C4822A]">Converse</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
@@ -39,10 +38,8 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-2 font-bold mb-4">
-                <span className="w-6 h-6 rounded-[8px] bg-primary flex items-center justify-center">
-                  <BookOpen size={12} className="text-white" />
-                </span>
-                ConversAI
+                <Image src={converseLogo} alt="Converse logo" width={24} height={24} className="shrink-0" />
+                <span className="text-[#C4822A]">Converse</span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Chat with your favorite books and discover new ways to read.
@@ -73,7 +70,7 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
             </div>
           </div>
           <div className="mt-8 pt-6 border-t border-border text-center text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} ConversAI. All rights reserved.
+            &copy; {new Date().getFullYear()} Converse. All rights reserved.
           </div>
         </div>
       </footer>

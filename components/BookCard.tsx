@@ -45,7 +45,7 @@ export function BookCard({ book, variant = 'poster', className, onChat }: BookCa
 
   if (variant === 'compact') {
     return (
-      <Link href={`/app/book/${book.id}`} className={cn('block', className)} data-testid={`book-card-${book.id}`}>
+      <Link href={`/book/${book.id}`} className={cn('block', className)} data-testid={`book-card-${book.id}`}>
         <div className="surface-card p-3 flex items-center gap-3 hover:shadow-md transition-shadow duration-200 group">
           <div className="w-10 h-14 rounded-[6px] overflow-hidden shrink-0 shadow-sm">
             <BookCoverImage src={book.cover_url} alt={book.title} variant="card" />
@@ -69,7 +69,7 @@ export function BookCard({ book, variant = 'poster', className, onChat }: BookCa
 
   if (variant === 'featured') {
     return (
-      <Link href={`/app/book/${book.id}`} className={cn('block', className)} data-testid={`book-card-${book.id}`}>
+      <Link href={`/book/${book.id}`} className={cn('block', className)} data-testid={`book-card-${book.id}`}>
         <div className="surface-card overflow-hidden group cursor-pointer hover:shadow-md transition-shadow duration-200">
           <div className="grid md:grid-cols-[220px_1fr] gap-0">
             <div className="relative h-48 md:h-full overflow-hidden">
@@ -97,7 +97,7 @@ export function BookCard({ book, variant = 'poster', className, onChat }: BookCa
   }
 
   return (
-    <Link href={`/app/book/${book.id}`} className={cn('block', className)} data-testid={`book-card-${book.id}`}>
+    <Link href={`/book/${book.id}`} className={cn('block', className)} data-testid={`book-card-${book.id}`}>
       <motion.div
         whileHover={{ y: -4 }}
         transition={{ duration: 0.2, ease: 'easeOut' }}

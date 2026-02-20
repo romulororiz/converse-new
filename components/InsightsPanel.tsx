@@ -1,12 +1,13 @@
 'use client';
 
-import { Lightbulb, Share2, Sparkles, X } from 'lucide-react';
+import { useState } from 'react';
+import { Check, Copy, Lightbulb, Share2, Sparkles, X } from 'lucide-react';
 import { Chip } from '@/components/ui/Chip';
 
 interface InsightsPanelProps {
   highlights: string[];
   onPrompt: (prompt: string) => void;
-  onShareInsight: () => void;
+  onShareHighlight: (content: string) => void;
   onRemoveHighlight?: (index: number) => void;
 }
 
@@ -19,7 +20,19 @@ const quickPrompts = [
   'What can I apply today?',
 ];
 
-export function InsightsPanel({ highlights, onPrompt, onShareInsight, onRemoveHighlight }: InsightsPanelProps) {
+export function InsightsPanel({ highlights, onPrompt, onShareHighlight, onRemoveHighlight }: InsightsPanelProps) {
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+
+  const handleCopy = async (index: number, content: string) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 1500);
+    } catch {
+      // Ignore clipboard failures.
+    }
+  };
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 space-y-5">
@@ -53,29 +66,36 @@ export function InsightsPanel({ highlights, onPrompt, onShareInsight, onRemoveHi
               {highlights.map((h, i) => (
                 <div key={i} className="highlight-callout p-3 text-xs leading-relaxed relative group">
                   <span className="line-clamp-3 text-foreground/85 italic">&ldquo;{h}&rdquo;</span>
-                  {onRemoveHighlight && (
+                  <div className="flex items-center gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
-                      onClick={() => onRemoveHighlight(i)}
-                      className="absolute top-2 right-2 w-4 h-4 rounded-full bg-[#C4822A]/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-[#C4822A]"
-                      title="Remove highlight"
+                      onClick={() => handleCopy(i, h)}
+                      className="p-1.5 rounded-[8px] text-muted-foreground/60 hover:text-foreground hover:bg-surface-2 transition-colors"
+                      title="Copy highlight"
                     >
-                      <X size={8} />
+                      {copiedIndex === i ? <Check size={11} /> : <Copy size={11} />}
                     </button>
-                  )}
+                    <button
+                      onClick={() => onShareHighlight(h)}
+                      className="p-1.5 rounded-[8px] text-muted-foreground/60 hover:text-foreground hover:bg-surface-2 transition-colors"
+                      title="Share highlight"
+                    >
+                      <Share2 size={11} />
+                    </button>
+                    {onRemoveHighlight && (
+                      <button
+                        onClick={() => onRemoveHighlight(i)}
+                        className="p-1.5 rounded-[8px] text-[#C4822A] hover:bg-[#C4822A]/10 transition-colors ml-auto"
+                        title="Remove highlight"
+                      >
+                        <X size={11} />
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
           )}
         </div>
-      </div>
-
-      <div className="pt-4 mt-auto">
-        <button
-          onClick={onShareInsight}
-          className="outline-button w-full h-9 inline-flex items-center justify-center gap-2 text-xs font-medium"
-        >
-          <Share2 size={13} /> Create shareable insight
-        </button>
       </div>
     </div>
   );

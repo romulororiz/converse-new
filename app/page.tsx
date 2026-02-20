@@ -4,39 +4,25 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PublicShell } from '@/components/PublicShell';
+import type { LucideIcon } from 'lucide-react';
 import {
   ArrowRight, BookOpen, MessageCircle, Sparkles, Crown, Share2,
   Compass, ChevronDown, Check, Bookmark, Star,
 } from 'lucide-react';
 
-const steps = [
-  {
-    step: '01',
-    icon: <Compass size={22} />,
-    title: 'Discover',
-    description: 'Browse a curated library of transformative books by mood, topic, or genre.',
-  },
-  {
-    step: '02',
-    icon: <MessageCircle size={22} />,
-    title: 'Converse',
-    description: 'Open a conversation with any book. Ask anything — it speaks in the author\'s voice.',
-  },
-  {
-    step: '03',
-    icon: <Bookmark size={22} />,
-    title: 'Save & Share',
-    description: 'Highlight key insights, save them forever, and share beautiful quote cards.',
-  },
+const steps: { step: string; icon: LucideIcon; title: string; description: string }[] = [
+  { step: '01', icon: Compass, title: 'Discover', description: 'Browse a curated library of transformative books by mood, topic, or genre.' },
+  { step: '02', icon: MessageCircle, title: 'Converse', description: 'Open a conversation with any book. Ask anything — it speaks in the author\'s voice.' },
+  { step: '03', icon: Bookmark, title: 'Save & Share', description: 'Highlight key insights, save them forever, and share beautiful quote cards.' },
 ];
 
-const features = [
-  { icon: <Sparkles size={18} />, title: 'AI Book Personas', description: 'Every book has a unique voice. Chat naturally like you\'re talking directly to the author.' },
-  { icon: <Compass size={18} />, title: 'Discover by Mood', description: 'Find your next read through topics, moods, and personalized recommendations.' },
-  { icon: <BookOpen size={18} />, title: '10 Free Daily Messages', description: 'Start for free. Chat with any book, every day. No credit card required.' },
-  { icon: <Crown size={18} />, title: 'Premium Unlimited', description: 'Upgrade for unlimited conversations, deeper insights, and priority responses.' },
-  { icon: <Bookmark size={18} />, title: 'Save Highlights', description: 'Save the quotes and insights that matter most. Build your personal knowledge base.' },
-  { icon: <Share2 size={18} />, title: 'Shareable Insights', description: 'Generate beautiful quote cards from any conversation — designed for sharing.' },
+const features: { icon: LucideIcon; title: string; description: string }[] = [
+  { icon: Sparkles, title: 'AI Book Personas', description: 'Every book has a unique voice. Chat naturally like you\'re talking directly to the author.' },
+  { icon: Compass, title: 'Discover by Mood', description: 'Find your next read through topics, moods, and personalized recommendations.' },
+  { icon: BookOpen, title: '10 Free Daily Messages', description: 'Start for free. Chat with any book, every day. No credit card required.' },
+  { icon: Crown, title: 'Premium Unlimited', description: 'Upgrade for unlimited conversations, deeper insights, and priority responses.' },
+  { icon: Bookmark, title: 'Save Highlights', description: 'Save the quotes and insights that matter most. Build your personal knowledge base.' },
+  { icon: Share2, title: 'Shareable Insights', description: 'Generate beautiful quote cards from any conversation — designed for sharing.' },
 ];
 
 const testimonials = [
@@ -49,7 +35,7 @@ const faqs = [
   { q: 'How does the AI know about each book?', a: 'Each book has a carefully crafted persona that understands the themes, characters, and insights of the work. The AI responds in the voice and style of the book itself.' },
   { q: 'Is there a free plan?', a: 'Yes! Every user gets 10 free messages per day. This resets daily, so you can chat with any book every single day without paying.' },
   { q: 'What books are available?', a: 'We have a curated library spanning personal development, psychology, business, philosophy, creativity, and more. New books are added regularly.' },
-  { q: 'Can I use ConversAI on mobile?', a: 'ConversAI is a web app that works beautifully on any device — phone, tablet, or desktop. No app download required.' },
+  { q: 'Can I use Converse on mobile?', a: 'Converse is a web app that works beautifully on any device — phone, tablet, or desktop. No app download required.' },
 ];
 
 function StarRating({ count }: { count: number }) {
@@ -72,8 +58,8 @@ export default function LandingPage() {
         <section className="relative py-20 sm:py-28 lg:py-36 bg-[#FAF9F6]">
           <div className="absolute inset-0 hero-gradient pointer-events-none" />
           {/* Decorative warm blobs */}
-          <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-[#C4822A]/5 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-10 left-[5%] w-80 h-80 rounded-full bg-[#1A3550]/4 blur-3xl pointer-events-none" />
+          <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-[#C4822A]/8 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-10 left-[5%] w-80 h-80 rounded-full bg-[#A86A1D]/8 blur-3xl pointer-events-none" />
 
           <div className="mx-auto max-w-[1200px] px-4 sm:px-6 relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -109,7 +95,7 @@ export default function LandingPage() {
                 </div>
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <div className="flex -space-x-1.5">
-                    {['#C4822A', '#1A3550', '#2E7D5E', '#6B7280'].map((c, i) => (
+                    {['#C4822A', '#A86A1D', '#2E7D5E', '#6B7280'].map((c, i) => (
                       <div key={i} className="w-7 h-7 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-white" style={{ backgroundColor: c }}>
                         {['S', 'M', 'L', 'A'][i]}
                       </div>
@@ -131,7 +117,7 @@ export default function LandingPage() {
 
                   {/* Book header */}
                   <div className="flex items-center gap-3 mb-5 pb-4 border-b border-border">
-                    <div className="w-10 h-14 rounded-[8px] bg-gradient-to-br from-[#1A3550] to-[#2B5882] flex items-center justify-center shadow-md">
+                    <div className="w-10 h-14 rounded-[8px] bg-gradient-to-br from-[#C4822A] to-[#8B5A1A] flex items-center justify-center shadow-md">
                       <BookOpen size={16} className="text-white" />
                     </div>
                     <div className="flex-1">
@@ -152,7 +138,7 @@ export default function LandingPage() {
                       </div>
                     </div>
                     <div className="flex justify-start gap-2.5">
-                      <div className="w-6 h-6 rounded-full bg-[#1A3550]/10 text-primary text-[10px] font-bold flex items-center justify-center shrink-0 mt-auto">
+                      <div className="w-6 h-6 rounded-full bg-[#C4822A]/15 text-primary text-[10px] font-bold flex items-center justify-center shrink-0 mt-auto">
                         A
                       </div>
                       <div className="bg-surface-2 border border-border px-4 py-2.5 rounded-2xl rounded-bl-sm max-w-[85%] text-sm text-foreground/90 leading-relaxed accent-border-left pl-4">
@@ -209,7 +195,7 @@ export default function LandingPage() {
                 >
                   <span className="absolute top-5 right-5 font-serif text-5xl font-bold text-foreground/5 select-none">{step.step}</span>
                   <div className="w-11 h-11 rounded-[12px] bg-primary flex items-center justify-center mb-4 text-white">
-                    {step.icon}
+                    <step.icon size={22} />
                   </div>
                   <h3 className="text-lg font-bold mb-2 text-foreground">{step.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
@@ -236,8 +222,8 @@ export default function LandingPage() {
                   transition={{ delay: i * 0.08 }}
                   className="surface-card p-6 group hover:shadow-md transition-shadow duration-200"
                 >
-                  <div className="w-10 h-10 rounded-[12px] bg-[#1A3550]/8 flex items-center justify-center mb-3 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-200">
-                    {feature.icon}
+                  <div className="w-10 h-10 rounded-[12px] bg-[#C4822A]/10 flex items-center justify-center mb-3 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-200">
+                    <feature.icon size={18} />
                   </div>
                   <h3 className="font-bold mb-1.5 text-foreground">{feature.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
@@ -370,7 +356,7 @@ export default function LandingPage() {
         {/* Final CTA */}
         <section className="py-20 sm:py-24 bg-white">
           <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
-            <div className="rounded-[24px] bg-[#1A3550] p-10 sm:p-14 text-center relative overflow-hidden">
+            <div className="rounded-[24px] bg-[#C4822A] p-10 sm:p-14 text-center relative overflow-hidden">
               <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 70% 50%, rgba(196,130,42,0.8) 0%, transparent 60%)' }} />
               <div className="relative z-10">
                 <h2 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-white">
@@ -381,7 +367,7 @@ export default function LandingPage() {
                 </p>
                 <Link
                   href="/auth/sign-up"
-                  className="inline-flex items-center gap-2 bg-white text-[#1A3550] h-12 px-8 rounded-[12px] font-bold text-base hover:bg-white/90 transition-colors"
+                  className="inline-flex items-center gap-2 bg-white text-[#A86A1D] h-12 px-8 rounded-[12px] font-bold text-base hover:bg-white/90 transition-colors"
                 >
                   Get started free <ArrowRight size={18} />
                 </Link>

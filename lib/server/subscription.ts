@@ -134,13 +134,15 @@ export async function getUserSubscription(userId: string): Promise<UserSubscript
   const rawDate = profile.last_message_reset_date;
   const normalizedDate = typeof rawDate === 'string' ? rawDate.slice(0, 10) : null;
 
+  const cleanPlan = (profile.subscription_plan?.trim() ?? 'free') as SubscriptionPlanName;
+
   return {
     id: profile.id,
-    subscription_plan: profile.subscription_plan,
+    subscription_plan: cleanPlan,
     subscription_status: profile.subscription_status ?? 'active',
     subscription_expires_at: profile.subscription_expires_at,
     message_count: profile.message_count ?? 0,
-    message_limit: profile.message_limit ?? SUBSCRIPTION_PLANS[profile.subscription_plan].message_limit,
+    message_limit: profile.message_limit ?? SUBSCRIPTION_PLANS[cleanPlan]?.message_limit ?? 10,
     last_message_reset_date: normalizedDate,
   };
 }

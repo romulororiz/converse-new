@@ -26,14 +26,15 @@ import { fetchCurrentProfile } from '@/lib/services/profile';
 import type { UserProfile } from '@/lib/core';
 import type { Book } from '@/lib/core';
 import { BookCoverImage } from '@/components/BookCoverImage';
+import converseLogo from '@/lib/assets/converse-logo-nobg.png';
 
 const navItems = [
-  { name: 'Home', href: '/d', icon: Home },
-  { name: 'Discover', href: '/d/discover', icon: Compass },
-  { name: 'Library', href: '/d/books', icon: BookOpen },
-  { name: 'Chats', href: '/d/chats', icon: MessageSquare },
-  { name: 'Highlights', href: '/d/highlights', icon: BookMarked },
-  { name: 'Goals', href: '/d/goals', icon: Target },
+  { name: 'Home', href: '/home', icon: Home },
+  { name: 'Discover', href: '/discover', icon: Compass },
+  { name: 'Library', href: '/books', icon: BookOpen },
+  { name: 'Chats', href: '/chats', icon: MessageSquare },
+  { name: 'Highlights', href: '/highlights', icon: BookMarked },
+  { name: 'Goals', href: '/goals', icon: Target },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -49,8 +50,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isActive = (href: string) =>
-    pathname === href || (href !== '/app' && pathname.startsWith(href));
-  const isChatRoute = pathname.startsWith('/app/chat/');
+    pathname === href || (href !== '/home' && pathname.startsWith(href));
+  const isChatRoute = pathname.startsWith('/chat/');
 
   useEffect(() => {
     fetchCurrentProfile().then(setProfile).catch(() => {});
@@ -102,14 +103,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background flex">
       {/* Desktop sidebar — 220px wide with labels */}
-      <aside className="hidden md:flex flex-col fixed top-0 left-0 h-screen z-40 w-56 bg-white border-r border-border">
+      <aside className="hidden md:flex flex-col fixed top-0 left-0 h-screen z-40 w-56 bg-[#FFFCF7] border-r border-[#E3D4BE] shadow-[2px_0_18px_rgba(0,0,0,0.05)]">
         {/* Logo */}
-        <div className="h-16 flex items-center px-5 border-b border-border shrink-0">
-          <Link href="/d" className="flex items-center gap-2.5 group">
-            <span className="w-8 h-8 rounded-[10px] bg-primary flex items-center justify-center shrink-0 transition-transform group-hover:scale-105">
-              <BookOpen size={15} className="text-white" />
-            </span>
-            <span className="font-bold text-[17px] tracking-tight text-foreground">ConversAI</span>
+        <div className="h-16 flex items-center px-5 border-b border-[#E3D4BE] shrink-0">
+          <Link href="/home" className="flex items-center gap-2.5 group">
+            <Image src={converseLogo} alt="Converse logo" width={30} height={30} className="shrink-0 transition-transform group-hover:scale-105" />
+            <span className="font-bold text-[17px] tracking-tight text-[#C4822A]">Converse</span>
           </Link>
         </div>
 
@@ -125,8 +124,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 className={cn(
                   'flex items-center gap-3 px-3 h-10 rounded-[10px] transition-all duration-150 text-sm font-medium',
                   active
-                    ? 'bg-[#F0F4F8] text-primary'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-surface-2'
+                    ? 'bg-[#F6EBD9] text-primary shadow-[inset_0_0_0_1px_rgba(196,130,42,0.18)]'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-[#F8F1E6]'
                 )}
               >
                 <item.icon size={18} strokeWidth={active ? 2.2 : 1.8} />
@@ -138,12 +137,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </nav>
 
         {/* Bottom — settings + profile */}
-        <div className="p-3 border-t border-border space-y-0.5">
+        <div className="p-3 border-t border-[#E3D4BE] space-y-0.5">
           <Link
-            href="/d/settings"
+            href="/settings"
             className={cn(
               'flex items-center gap-3 px-3 h-10 rounded-[10px] transition-all duration-150 text-sm font-medium',
-              isActive('/app/settings') ? 'bg-[#F0F4F8] text-primary' : 'text-muted-foreground hover:text-foreground hover:bg-surface-2'
+              isActive('/settings')
+                ? 'bg-[#F6EBD9] text-primary shadow-[inset_0_0_0_1px_rgba(196,130,42,0.18)]'
+                : 'text-muted-foreground hover:text-foreground hover:bg-[#F8F1E6]'
             )}
           >
             <Settings size={18} strokeWidth={1.8} />
@@ -154,7 +155,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <div ref={avatarRef} className="relative">
             <button
               onClick={() => setAvatarOpen((v) => !v)}
-              className="w-full flex items-center gap-3 px-3 h-11 rounded-[10px] hover:bg-surface-2 transition-colors cursor-pointer"
+              className="w-full flex items-center gap-3 px-3 h-11 rounded-[10px] hover:bg-[#F8F1E6] transition-colors cursor-pointer"
             >
               {profile?.avatar_url ? (
                 <Image src={profile.avatar_url} alt="" width={28} height={28} className="rounded-full object-cover shrink-0" />
@@ -182,8 +183,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   className="absolute bottom-full left-0 right-0 mb-1 surface-card py-1.5 shadow-lg z-50"
                 >
                   {[
-                    { label: 'Profile', icon: User, href: '/app/profile' },
-                    { label: 'Billing', icon: CreditCard, href: '/app/billing' },
+                    { label: 'Profile', icon: User, href: '/profile' },
+                    { label: 'Billing', icon: CreditCard, href: '/billing' },
                   ].map((item) => (
                     <Link
                       key={item.href}
@@ -213,20 +214,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* Main content — offset by sidebar width */}
       <div className="flex-1 md:ml-56 flex flex-col min-h-screen">
         {/* Top bar */}
-        <header className="sticky top-0 z-30 h-14 border-b border-border bg-white/90 backdrop-blur-sm flex items-center px-4 gap-3">
+        <header className="sticky top-0 z-30 h-14 border-b border-[#E3D4BE] bg-[#FFFCF7]/95 backdrop-blur-sm shadow-[0_1px_0_rgba(255,255,255,0.75)_inset,0_2px_10px_rgba(0,0,0,0.04)] flex items-center px-4 gap-3">
           {/* Mobile logo */}
-          <Link href="/d" className="md:hidden flex items-center gap-2 shrink-0">
-            <span className="w-7 h-7 rounded-[8px] bg-primary flex items-center justify-center">
-              <BookOpen size={13} className="text-white" />
-            </span>
-            <span className="font-bold text-base text-foreground">ConversAI</span>
+          <Link href="/home" className="md:hidden flex items-center gap-2 shrink-0">
+            <Image src={converseLogo} alt="Converse logo" width={26} height={26} className="shrink-0" />
+            <span className="font-bold text-base text-[#C4822A]">Converse</span>
           </Link>
 
           {/* Search trigger */}
           <button
             onClick={() => setSearchOpen(true)}
             data-testid="search-trigger"
-            className="flex-1 max-w-lg mx-auto h-9 pl-3 pr-3 rounded-[10px] bg-surface-2 border border-border text-sm text-muted-foreground flex items-center gap-2 hover:border-border/80 transition-colors cursor-text"
+            className="flex-1 max-w-lg mx-auto h-9 pl-3 pr-3 rounded-[10px] bg-[#FBF5EC] border border-[#E3D4BE] text-sm text-muted-foreground flex items-center gap-2 hover:border-[#D4BA92] shadow-[0_1px_0_rgba(255,255,255,0.85)_inset] transition-colors cursor-text"
           >
             <Search size={14} className="text-muted-foreground/70" />
             <span className="flex-1 text-left">Search books, topics...</span>
@@ -263,9 +262,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     <p className="text-xs text-muted-foreground truncate">{profile?.email}</p>
                   </div>
                   {[
-                    { label: 'Profile', icon: User, href: '/app/profile' },
-                    { label: 'Settings', icon: Settings, href: '/app/settings' },
-                    { label: 'Billing', icon: CreditCard, href: '/app/billing' },
+                    { label: 'Profile', icon: User, href: '/profile' },
+                    { label: 'Settings', icon: Settings, href: '/settings' },
+                    { label: 'Billing', icon: CreditCard, href: '/billing' },
                   ].map((item) => (
                     <Link key={item.href} href={item.href} onClick={() => setAvatarOpen(false)}
                       className="flex items-center gap-2.5 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-surface-2 transition-colors">
@@ -286,7 +285,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
         {/* Page content */}
         <main className={cn(
-          'flex-1',
+          'flex-1 bg-[#F7F1E7]',
           isChatRoute ? 'pb-0 md:pb-0' : 'p-4 sm:p-6 pb-24 md:pb-6'
         )}>
           {isChatRoute ? children : (
@@ -296,9 +295,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </div>
 
       {/* Mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-border px-1 py-1.5 safe-bottom">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FFFCF7] border-t border-[#E3D4BE] shadow-[0_-4px_14px_rgba(0,0,0,0.04)] px-1 py-1.5 safe-bottom">
         <div className="flex items-center justify-around">
-          {[...navItems.slice(0, 4), { name: 'Profile', href: '/app/profile', icon: User }].map((item) => {
+          {[...navItems.slice(0, 4), { name: 'Profile', href: '/profile', icon: User }].map((item) => {
             const active = isActive(item.href);
             return (
               <Link
@@ -366,7 +365,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                         key={book.id}
                         value={book.id}
                         onSelect={() => {
-                          router.push(`/app/book/${book.id}`);
+                          router.push(`/book/${book.id}`);
                           setSearchOpen(false);
                           setSearchQuery('');
                           setSearchResults([]);

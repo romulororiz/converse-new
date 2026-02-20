@@ -20,7 +20,7 @@ export function ShareCard({ bookTitle, bookAuthor, bookCover, quote }: ShareCard
   const displayQuote = expanded || !isLong ? quote : quote.slice(0, MAX_CHARS) + '...';
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(`"${quote}" — ${bookTitle}${bookAuthor ? `, ${bookAuthor}` : ''}\n\nvia ConversAI`);
+    navigator.clipboard.writeText(`"${quote}" — ${bookTitle}${bookAuthor ? `, ${bookAuthor}` : ''}\n\nvia Converse`);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -51,7 +51,7 @@ export function ShareCard({ bookTitle, bookAuthor, bookCover, quote }: ShareCard
 
       <div className="mt-4 pt-3 border-t border-paper-foreground/10 flex items-center justify-center gap-3">
         <span className="flex items-center gap-1.5 text-xs text-paper-foreground/40">
-          <Sparkles size={10} /> ConversAI
+          <Sparkles size={10} /> Converse
         </span>
         <button
           onClick={handleCopy}

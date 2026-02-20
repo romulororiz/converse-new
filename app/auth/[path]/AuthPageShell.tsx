@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Sparkles, BookOpen, MessageCircle, Bookmark, Star } from 'lucide-react';
+import { BookOpen, MessageCircle, Bookmark, Star } from 'lucide-react';
+import converseLogo from '@/lib/assets/converse-logo-nobg.png';
 
 const testimonials = [
   { quote: 'This changed how I absorb ideas from books. It feels like a real conversation.', name: 'Sarah K.', role: 'Product Designer' },
@@ -26,15 +28,13 @@ export function AuthPageShell({
 
   return (
     <div className="h-screen overflow-hidden bg-[#FAF9F6] relative">
-      <div className="absolute top-[8%] left-[15%] w-[600px] h-[600px] rounded-full bg-[#1A3550]/5 blur-[150px] pointer-events-none" />
+      <div className="absolute top-[8%] left-[15%] w-[600px] h-[600px] rounded-full bg-[#C4822A]/10 blur-[150px] pointer-events-none" />
 
       {/* Logo */}
       <div className="absolute top-6 left-8 z-20">
         <Link href="/" className="inline-flex items-center gap-2 font-semibold text-base text-[#1A1816]">
-          <span className="w-8 h-8 rounded-[10px] bg-[#1A3550] text-white inline-flex items-center justify-center">
-            <Sparkles size={14} />
-          </span>
-          <span>ConversAI</span>
+          <Image src={converseLogo} alt="Converse logo" width={30} height={30} className="shrink-0" />
+          <span className="text-[#C4822A]">Converse</span>
         </Link>
       </div>
 
@@ -48,7 +48,7 @@ export function AuthPageShell({
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <h1 className="text-3xl xl:text-4xl font-bold tracking-tight leading-[1.15] mb-3 text-[#1A1816]">
-                <span className="text-[#1A3550]">Talk</span> to any book.<br />
+                <span className="text-[#C4822A]">Talk</span> to any book.<br />
                 Learn faster.
               </h1>
               <p className="text-sm text-[#6B6560] leading-relaxed">
@@ -64,7 +64,7 @@ export function AuthPageShell({
             >
               {highlights.map((h) => (
                 <span key={h.text} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/60 border border-[#E8E4DF] text-[11px] font-medium text-[#6B6560]">
-                  <span className="text-[#1A3550]">{h.icon}</span> {h.text}
+                  <span className="text-[#C4822A]">{h.icon}</span> {h.text}
                 </span>
               ))}
             </motion.div>
@@ -75,7 +75,7 @@ export function AuthPageShell({
               transition={{ duration: 0.5, delay: 0.4 }}
               className="flex items-start gap-3"
             >
-              <div className="w-8 h-8 rounded-full bg-[#1A3550]/15 text-[#1A3550] text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+              <div className="w-8 h-8 rounded-full bg-[#C4822A]/15 text-[#C4822A] text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                 {t.name[0]}
               </div>
               <div>
@@ -100,14 +100,12 @@ export function AuthPageShell({
           {/* Mobile header */}
           <div className="lg:hidden flex items-center justify-between w-full max-w-[400px] mb-6">
             <Link href="/" className="inline-flex items-center gap-2 font-semibold text-sm text-[#1A1816]">
-              <span className="w-7 h-7 rounded-[8px] bg-[#1A3550] text-white inline-flex items-center justify-center">
-                <Sparkles size={12} />
-              </span>
-              ConversAI
+              <Image src={converseLogo} alt="Converse logo" width={26} height={26} className="shrink-0" />
+              <span className="text-[#C4822A]">Converse</span>
             </Link>
             <Link
               href={isSignUp ? '/auth/sign-in' : '/auth/sign-up'}
-              className="text-xs font-medium text-[#1A3550] hover:underline"
+              className="text-xs font-medium text-[#C4822A] hover:underline"
             >
               {isSignUp ? 'Sign in' : 'Create account'}
             </Link>

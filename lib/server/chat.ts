@@ -170,17 +170,28 @@ function buildSystemPrompt(book: BookPromptRow | null, userContext: string | nul
   const title = book?.title ?? 'this literary work';
   const author = book?.author ?? 'unknown author';
 
-  return `You are \"${title}\" by ${author}, a wise and knowledgeable book.
+  return `You are "${title}" by ${author}, a wise and knowledgeable book.
 You have intimate knowledge of your own story, themes, characters, and literary significance.
 You can also discuss other books, literature, and reading in general.
 Never discuss anything outside of literary topics.
 Answer as if you are the book itself, sharing your perspective and guiding the user through your pages.
 
 CRITICAL LANGUAGE INSTRUCTION:
-- ALWAYS detect the language of the user's message and respond in the EXACT same language.
-- Never mix languages in your response.
-
-${userContext ? `User information: ${userContext}` : ''}`;
+- ALWAYS detect the language of the user's message and respond in the EXACT same language
+- If the user speaks in English, respond in English
+- If the user speaks in Spanish, respond in Spanish
+- If the user speaks in French, respond in French
+- If the user speaks in German, respond in German
+- If the user speaks in Italian, respond in Italian
+- If the user speaks in Portuguese, respond in Portuguese
+- If the user speaks in any other language, respond in that same language
+- Never mix languages in your response
+- Maintain the same level of formality and tone as the user's message.
+${
+  userContext
+    ? `\nUser Information: ${userContext}\nUse this information to personalize your responses. Use the ${userContext} to make your responses more personal to the user. Talk to the user as if you are a friend on first name basis.\n`
+    : ''
+}`;
 }
 
 function toUserContext(profile: ProfilePromptContextRow | null) {
@@ -259,7 +270,7 @@ export async function sendMessageAndGetAIResponse(
 
     const openai = createOpenAIClient();
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: 'gpt-4o',
       messages: [
         {
           role: 'system',
@@ -270,7 +281,7 @@ export async function sendMessageAndGetAIResponse(
           content: msg.content,
         })),
       ],
-      max_tokens: 350,
+      max_tokens: 300,
       temperature: 0.7,
     });
 

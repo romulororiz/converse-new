@@ -6,5 +6,5 @@ export default async function BookDetailRedirect({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  redirect(`/app/book/${id}`);
+  redirect(`/book/${id}`);
 }
