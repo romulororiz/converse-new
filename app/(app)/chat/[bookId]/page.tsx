@@ -254,7 +254,7 @@ export default function ChatDetailPage() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-56px)] bg-[#FAF9F6]">
+    <div className="flex h-[calc(100vh-56px)]" style={{ backgroundColor: 'var(--chat-bg)' }}>
       {/* Main chat area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Book header */}
@@ -408,7 +408,7 @@ export default function ChatDetailPage() {
             </div>
           </div>
         ) : (
-          <div className="flex-1 min-h-0 overflow-y-auto p-4 lg:hidden bg-[#FAF9F6]">
+          <div className="flex-1 min-h-0 overflow-y-auto p-4 lg:hidden" style={{ backgroundColor: 'var(--chat-bg)' }}>
             <InsightsPanel
               highlights={bookHighlights.map((h) => h.content)}
               onPrompt={(p) => { setActiveTab('chat'); handleSendMessage(p); }}
@@ -420,7 +420,7 @@ export default function ChatDetailPage() {
 
         {/* Composer */}
         {activeTab === 'chat' && (
-          <div className="shrink-0 border-t border-border bg-white px-4 py-3">
+          <div className="shrink-0 border-t border-border px-4 py-3" style={{ backgroundColor: 'var(--composer-bg)' }}>
             {isBlocked && (
               <div className="max-w-[720px] mx-auto mb-2 text-center">
                 <p className="text-xs text-danger">You&apos;ve used all free messages today.{' '}
@@ -438,13 +438,14 @@ export default function ChatDetailPage() {
                 placeholder={isBlocked ? 'Upgrade to continue chatting...' : `Ask ${book?.title ?? 'this book'} anything...`}
                 disabled={isBlocked}
                 data-testid="chat-input"
-                className="flex-1 pl-4 pr-4 py-3 rounded-xl bg-surface-2 border border-border text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-primary/30 transition-colors resize-none disabled:opacity-50"
-                style={{ minHeight: '44px', maxHeight: '160px' }}
+                className="flex-1 pl-4 pr-4 py-3 rounded-xl border border-border text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-primary/30 transition-colors resize-none disabled:opacity-50"
+                style={{ backgroundColor: 'var(--surface-3)', minHeight: '44px', maxHeight: '160px' }}
               />
               <button
                 onClick={handleOpenVoice}
                 disabled={sending || remainingApiSeconds > 0 || isBlocked}
-                className="w-[44px] h-[44px] shrink-0 rounded-xl bg-surface-2 border border-border text-primary flex items-center justify-center transition hover:bg-surface-1 disabled:opacity-30 cursor-pointer"
+                className="w-[44px] h-[44px] shrink-0 rounded-xl border border-border text-primary flex items-center justify-center transition hover:bg-surface-1 disabled:opacity-30 cursor-pointer"
+                style={{ backgroundColor: 'var(--surface-3)' }}
                 title="Voice chat"
               >
                 <Mic size={15} />
