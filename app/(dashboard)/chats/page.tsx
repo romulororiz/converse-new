@@ -45,15 +45,16 @@ export default function ChatsPage() {
   };
 
   return (
-    <div className="space-y-6 pb-24 md:pb-6">
+    <div className="space-y-6 pb-24 md:pb-8">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-primary text-xs font-medium uppercase tracking-wide mb-1">
-            <MessageSquare size={13} /> Conversations
+          <div className="flex items-center gap-2 text-(--neo-accent) mb-2">
+            <MessageSquare size={13} />
+            <span className="mono text-[10px] font-medium uppercase tracking-[0.18em]">Conversations</span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">Your Conversations</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">Continue your literary journey</p>
+          <h1 className="font-serif text-3xl font-bold tracking-tight text-(--text-primary)">Your Conversations</h1>
+          <p className="text-sm text-(--text-muted) mt-0.5">Continue your literary journey</p>
         </div>
         <MessageCounterBadge
           variant="pill"
@@ -65,7 +66,7 @@ export default function ChatsPage() {
 
       {/* Search */}
       <div className="relative">
-        <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+        <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-(--text-muted)" />
         <Input
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -78,19 +79,23 @@ export default function ChatsPage() {
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="animate-pulse surface-card h-48" />
+            <div key={i} className="animate-pulse ink-card h-48" />
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="surface-card p-12 flex flex-col items-center justify-center text-center">
-          <div className="w-14 h-14 rounded-[14px] bg-surface-2 flex items-center justify-center mb-4">
-            <MessageSquare className="w-6 h-6 text-muted-foreground" />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="ink-card p-12 flex flex-col items-center justify-center text-center"
+        >
+          <div className="w-14 h-14 rounded-xl bg-(--neo-accent-light) flex items-center justify-center mb-4">
+            <MessageSquare className="w-6 h-6 text-(--neo-accent)" />
           </div>
-          <h3 className="font-semibold mb-2">No conversations yet</h3>
-          <p className="text-sm text-muted-foreground max-w-sm mb-5">
+          <h3 className="font-serif font-semibold text-lg mb-2 text-(--text-primary)">No conversations yet</h3>
+          <p className="text-sm text-(--text-muted) max-w-sm mb-6 leading-relaxed">
             Start a new conversation by selecting a book from the library.
           </p>
-          <Link href="/books" className="accent-button h-10 px-5 inline-flex items-center gap-2 text-sm font-medium">
+          <Link href="/books" className="gold-button h-10 px-5 inline-flex items-center gap-2 text-sm font-semibold">
             <BookOpen size={15} /> Browse books
           </Link>
         </motion.div>
@@ -102,7 +107,7 @@ export default function ChatsPage() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.04 }}
-                className="group relative h-48 overflow-hidden surface-card hover:ring-1 hover:ring-primary/20 transition-all cursor-pointer"
+                className="group relative h-48 overflow-hidden ink-card hover:ring-1 hover:ring-(--neo-accent)/25 hover:shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300 cursor-pointer"
               >
                 <BookCoverImage
                   src={chat.cover_url}
@@ -110,16 +115,16 @@ export default function ChatsPage() {
                   variant="fill"
                   className="transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80" />
+                <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/50 to-black/85" />
                 <div className="absolute inset-0 p-4 flex flex-col justify-end">
-                  <h3 className="font-semibold text-white mb-1 line-clamp-1">
+                  <h3 className="font-serif font-semibold text-white mb-1 line-clamp-1">
                     {chat.title || 'Untitled Book'}
                   </h3>
-                  <div className="flex items-center gap-2 text-xs text-white/70 mb-1">
-                    <Clock className="w-3 h-3" />
-                    <span>{chat.author ?? 'Unknown Author'}</span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <Clock className="w-3 h-3 text-white/50" />
+                    <span className="mono text-[10px] text-white/60">{chat.author ?? 'Unknown Author'}</span>
                   </div>
-                  <p className="text-xs text-white/50 line-clamp-2">
+                  <p className="text-xs text-white/40 line-clamp-2 leading-relaxed">
                     {chat.last_message || 'Start chatting with this book'}
                   </p>
                 </div>

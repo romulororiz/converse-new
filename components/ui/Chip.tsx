@@ -10,11 +10,11 @@ const chipVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-surface-2 border border-border text-muted-foreground hover:text-foreground hover:border-[rgba(255,255,255,0.14)]",
+          "bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-overlay)]",
         active:
-          "bg-primary text-primary-foreground border border-primary",
+          "bg-[var(--neo-accent)] text-[var(--text-on-accent)] border border-[var(--neo-accent)] shadow-sm font-semibold",
         muted:
-          "bg-surface-2 text-muted-foreground border border-transparent",
+          "bg-[var(--bg-elevated)] text-[var(--text-muted)] border border-transparent",
       },
       size: {
         default: "px-3 py-1.5",

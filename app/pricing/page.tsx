@@ -65,7 +65,7 @@ export default function PricingPage() {
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
         <div className="text-center mb-14">
           <p className="text-sm font-medium text-primary mb-2 uppercase tracking-wide">Pricing</p>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+          <h1 className="font-serif text-4xl sm:text-5xl font-semibold tracking-tight mb-4">
             Simple, transparent pricing
           </h1>
           <p className="text-lg text-muted-foreground max-w-lg mx-auto">

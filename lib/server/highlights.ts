@@ -26,8 +26,6 @@ async function ensureHighlightsSchema() {
   if (schemaReady) return;
 
   await queryNeon(`
-    DROP TABLE IF EXISTS insights;
-
     CREATE TABLE IF NOT EXISTS highlights (
       id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
       user_id TEXT NOT NULL,
@@ -45,6 +43,12 @@ async function ensureHighlightsSchema() {
 
     CREATE INDEX IF NOT EXISTS highlights_book_id_idx
       ON highlights (book_id);
+
+    CREATE INDEX IF NOT EXISTS messages_session_id_idx
+      ON messages (session_id);
+
+    CREATE INDEX IF NOT EXISTS profiles_subscription_plan_idx
+      ON profiles (subscription_plan);
   `);
 
   schemaReady = true;

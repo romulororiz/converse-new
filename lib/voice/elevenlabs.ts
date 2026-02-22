@@ -1,61 +1,81 @@
+// ── Active voices ──
+// Two natural, conversational premade voices from ElevenLabs.
 export const VOICE_CONFIGS = {
-  narrator: {
-    voice_id: 'JBFqnCBsd6RMkjVDRZzb',
-    name: 'George',
-    description: 'Professional, clear narrator voice',
-    gender: 'male' as const,
-    personality: 'authoritative',
-  },
-  storyteller: {
-    voice_id: 'TxGEqnHWrfWFTfGW9XjX',
-    name: 'Josh',
-    description: 'Warm, engaging storyteller',
-    gender: 'male' as const,
-    personality: 'warm',
-  },
-  wise: {
-    voice_id: 'CYw3kZ02Hs0563khs1Fj',
-    name: 'Dave',
-    description: 'Wise, thoughtful voice',
-    gender: 'male' as const,
-    personality: 'wise',
-  },
-  conversational: {
-    voice_id: 'pNInz6obpgDQGcFmaJgB',
-    name: 'Adam',
-    description: 'Natural, conversational voice',
+  male: {
+    voice_id: 'iP95p4xoKVk53GoZ742B',
+    name: 'Chris',
+    description: 'Natural, down-to-earth conversational male voice',
     gender: 'male' as const,
     personality: 'friendly',
   },
-  elegantFemale: {
+  female: {
     voice_id: 'EXAVITQu4vr4xnSDxMaL',
-    name: 'Bella',
-    description: 'Elegant, sophisticated female voice',
+    name: 'Sarah',
+    description: 'Warm, confident, reassuring female voice',
     gender: 'female' as const,
-    personality: 'elegant',
-  },
-  warmFemale: {
-    voice_id: 'MF3mGyEYCl7XYWbV9V6O',
-    name: 'Elli',
-    description: 'Warm, nurturing female voice',
-    gender: 'female' as const,
-    personality: 'nurturing',
-  },
-  intellectualFemale: {
-    voice_id: 'ThT5KcBeYPX3keUQqHPh',
-    name: 'Dorothy',
-    description: 'Intellectual, clear female voice',
-    gender: 'female' as const,
-    personality: 'intellectual',
-  },
-  youthfulFemale: {
-    voice_id: 'XrExE9yKIg1WjnnlVkGX',
-    name: 'Matilda',
-    description: 'Youthful, energetic female voice',
-    gender: 'female' as const,
-    personality: 'youthful',
+    personality: 'professional',
   },
 };
+
+// ── Commented-out voices (for future use) ──
+// export const VOICE_CONFIGS_EXTENDED = {
+//   narrator: {
+//     voice_id: 'JBFqnCBsd6RMkjVDRZzb',
+//     name: 'George',
+//     description: 'Professional, clear narrator voice',
+//     gender: 'male' as const,
+//     personality: 'authoritative',
+//   },
+//   storyteller: {
+//     voice_id: 'TxGEqnHWrfWFTfGW9XjX',
+//     name: 'Josh',
+//     description: 'Warm, engaging storyteller',
+//     gender: 'male' as const,
+//     personality: 'warm',
+//   },
+//   wise: {
+//     voice_id: 'CYw3kZ02Hs0563khs1Fj',
+//     name: 'Dave',
+//     description: 'Wise, thoughtful voice',
+//     gender: 'male' as const,
+//     personality: 'wise',
+//   },
+//   conversational: {
+//     voice_id: 'pNInz6obpgDQGcFmaJgB',
+//     name: 'Adam',
+//     description: 'Natural, conversational voice',
+//     gender: 'male' as const,
+//     personality: 'friendly',
+//   },
+//   elegantFemale: {
+//     voice_id: 'EXAVITQu4vr4xnSDxMaL',
+//     name: 'Bella',
+//     description: 'Elegant, sophisticated female voice',
+//     gender: 'female' as const,
+//     personality: 'elegant',
+//   },
+//   warmFemale: {
+//     voice_id: 'MF3mGyEYCl7XYWbV9V6O',
+//     name: 'Elli',
+//     description: 'Warm, nurturing female voice',
+//     gender: 'female' as const,
+//     personality: 'nurturing',
+//   },
+//   intellectualFemale: {
+//     voice_id: 'ThT5KcBeYPX3keUQqHPh',
+//     name: 'Dorothy',
+//     description: 'Intellectual, clear female voice',
+//     gender: 'female' as const,
+//     personality: 'intellectual',
+//   },
+//   youthfulFemale: {
+//     voice_id: 'XrExE9yKIg1WjnnlVkGX',
+//     name: 'Matilda',
+//     description: 'Youthful, energetic female voice',
+//     gender: 'female' as const,
+//     personality: 'youthful',
+//   },
+// };
 
 export interface VoiceSettings {
   stability: number;
@@ -106,10 +126,9 @@ const FEMALE_NAME_PATTERNS = [
 
 export function selectVoiceForBook(
   bookAuthor?: string,
-  bookId?: string,
 ): string {
-  if (!bookAuthor || !bookId) {
-    return VOICE_CONFIGS.conversational.voice_id;
+  if (!bookAuthor) {
+    return VOICE_CONFIGS.male.voice_id;
   }
 
   const authorLower = bookAuthor.toLowerCase();
@@ -123,33 +142,14 @@ export function selectVoiceForBook(
     isFemale = FEMALE_NAME_PATTERNS.some((n) => authorLower.includes(n));
   }
 
-  const bookHash = bookId
-    .split('')
-    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const variation = bookHash % 4;
-
-  if (isFemale) {
-    const voices = [
-      VOICE_CONFIGS.elegantFemale,
-      VOICE_CONFIGS.warmFemale,
-      VOICE_CONFIGS.intellectualFemale,
-      VOICE_CONFIGS.youthfulFemale,
-    ];
-    return voices[variation].voice_id;
-  }
-
-  const voices = [
-    VOICE_CONFIGS.narrator,
-    VOICE_CONFIGS.storyteller,
-    VOICE_CONFIGS.wise,
-    VOICE_CONFIGS.conversational,
-  ];
-  return voices[variation].voice_id;
+  return isFemale
+    ? VOICE_CONFIGS.female.voice_id
+    : VOICE_CONFIGS.male.voice_id;
 }
 
 export function getVoiceInfo(voiceId: string) {
   return (
     Object.values(VOICE_CONFIGS).find((c) => c.voice_id === voiceId) ??
-    VOICE_CONFIGS.conversational
+    VOICE_CONFIGS.male
   );
 }

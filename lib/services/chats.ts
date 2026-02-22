@@ -47,6 +47,14 @@ export interface SendBookMessageResponse {
   sessionId: string;
 }
 
+export async function resetBookChat(bookId: string): Promise<void> {
+  const response = await fetch(`/api/chats/${bookId}`, { method: 'DELETE' });
+  if (!response.ok && response.status !== 204) {
+    const data = await response.json().catch(() => null);
+    throw new Error(data?.error ?? 'Failed to reset chat');
+  }
+}
+
 export async function sendBookMessage(bookId: string, content: string): Promise<SendBookMessageResponse> {
   const response = await fetch(`/api/chats/${bookId}/messages`, {
     method: 'POST',

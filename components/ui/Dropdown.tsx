@@ -19,7 +19,7 @@ export function Dropdown({ className, icon, options, ...props }: DropdownProps) 
       )}
       <select
         className={cn(
-          "appearance-none surface-inset h-10 pr-9 text-sm text-foreground bg-surface-2 cursor-pointer",
+          "appearance-none h-10 pr-9 text-sm text-foreground bg-(--bg-elevated) border border-(--border) rounded-md cursor-pointer",
           "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
           icon ? "pl-9" : "pl-3"
         )}

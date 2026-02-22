@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Mic, MicOff } from 'lucide-react';
 import { selectVoiceForBook } from '@/lib/voice/elevenlabs';
+import { VoiceOrb } from '@/components/VoiceOrb';
 
 type VoiceState = 'idle' | 'listening' | 'processing' | 'speaking';
 
@@ -49,6 +50,7 @@ export function VoiceChat({
   const closedRef = useRef(true);
   const processingRef = useRef(false);
   const conversationRef = useRef<ConversationMessage[]>([]);
+  const smoothedLevelRef = useRef<number>(0);
 
   useEffect(() => {
     conversationRef.current = conversation;
@@ -63,7 +65,7 @@ export function VoiceChat({
       setState('idle');
       setStatusText('Tap to speak');
       setAudioLevel(0);
-      voiceIdRef.current = selectVoiceForBook(bookAuthor, bookId);
+      voiceIdRef.current = selectVoiceForBook(bookAuthor);
     } else {
       hardCleanup();
     }
@@ -113,6 +115,8 @@ export function VoiceChat({
     audioChunksRef.current = [];
   }, []);
 
+  const AUDIO_LERP = 0.15;
+
   const monitorAudioLevel = useCallback(() => {
     const analyser = analyserRef.current;
     if (!analyser) return;
@@ -121,11 +125,13 @@ export function VoiceChat({
       if (closedRef.current) return;
       analyser.getByteFrequencyData(data);
       const avg = data.reduce((sum, v) => sum + v, 0) / data.length;
-      setAudioLevel(avg / 255);
+      const raw = avg / 255;
+      smoothedLevelRef.current += (raw - smoothedLevelRef.current) * AUDIO_LERP;
+      setAudioLevel(smoothedLevelRef.current);
       animFrameRef.current = requestAnimationFrame(tick);
     };
     tick();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const startListening = useCallback(async () => {
     if (closedRef.current || processingRef.current) return;
@@ -356,9 +362,6 @@ export function VoiceChat({
 
   if (!visible) return null;
 
-  const orbScale = state === 'listening' ? 1 + audioLevel * 0.4 : state === 'speaking' ? 1.05 : 1;
-  const orbGlowScale = state === 'listening' ? 1.3 + audioLevel * 0.5 : state === 'speaking' ? 1.2 : 1;
-
   return (
     <AnimatePresence>
       {visible && (
@@ -366,10 +369,11 @@ export function VoiceChat({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/95"
+          className="fixed inset-0 z-100 flex flex-col items-center justify-center bg-black/95"
         >
           <button
             onClick={handleClose}
+            aria-label="Close voice chat"
             className="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-colors z-10 cursor-pointer"
           >
             <X size={20} />
@@ -383,57 +387,7 @@ export function VoiceChat({
           )}
 
           <div className="relative flex items-center justify-center mb-16">
-            <motion.div
-              animate={{
-                scale: orbGlowScale,
-                opacity: state === 'listening' || state === 'speaking' ? 0.2 : 0.05,
-              }}
-              transition={{ type: 'spring', damping: 12, stiffness: 80 }}
-              className="absolute w-48 h-48 rounded-full"
-              style={{ background: 'radial-gradient(circle, rgba(196,130,42,0.4) 0%, transparent 70%)' }}
-            />
-
-            <motion.div
-              animate={{
-                scale: state === 'listening' ? 1.15 + audioLevel * 0.3 : state === 'speaking' ? 1.1 : 1,
-                opacity: state === 'listening' || state === 'speaking' ? 0.3 : 0.1,
-              }}
-              transition={{ type: 'spring', damping: 10, stiffness: 100 }}
-              className="absolute w-36 h-36 rounded-full border border-[#C4822A]/30"
-            />
-
-            <motion.div
-              animate={{ scale: orbScale }}
-              transition={{ type: 'spring', damping: 8, stiffness: 120 }}
-              className="w-28 h-28 rounded-full relative overflow-hidden"
-              style={{
-                background: state === 'listening'
-                  ? 'radial-gradient(circle at 35% 35%, #e0a84c, #C4822A, #8B5A1A)'
-                  : state === 'processing'
-                    ? 'radial-gradient(circle at 35% 35%, #9ca3af, #6b7280, #4b5563)'
-                    : state === 'speaking'
-                      ? 'radial-gradient(circle at 35% 35%, #d4a44a, #C4822A, #9B6A2A)'
-                      : 'radial-gradient(circle at 35% 35%, #d4a44a, #C4822A, #8B5A1A)',
-                boxShadow: state === 'listening'
-                  ? `0 0 ${30 + audioLevel * 40}px rgba(196,130,42,0.5)`
-                  : state === 'speaking'
-                    ? '0 0 30px rgba(196,130,42,0.3)'
-                    : '0 0 15px rgba(196,130,42,0.2)',
-              }}
-            >
-              <div
-                className="absolute top-3 left-4 w-8 h-8 rounded-full"
-                style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%)' }}
-              />
-            </motion.div>
-
-            {state === 'processing' && (
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                className="absolute w-36 h-36 rounded-full border-2 border-transparent border-t-[#C4822A]/50"
-              />
-            )}
+            <VoiceOrb audioLevel={audioLevel} state={state} size={200} />
           </div>
 
           <motion.p
@@ -448,7 +402,8 @@ export function VoiceChat({
           <button
             onClick={toggleMicrophone}
             disabled={state === 'processing' || state === 'speaking'}
-            className={`w-[70px] h-[70px] rounded-full flex items-center justify-center border-2 transition-all cursor-pointer ${
+            aria-label={state === 'listening' ? 'Stop listening' : 'Start listening'}
+            className={`w-17.5 h-17.5 rounded-full flex items-center justify-center border-2 transition-all cursor-pointer ${
               state === 'listening'
                 ? 'bg-red-500/30 border-red-500 text-white'
                 : state === 'processing' || state === 'speaking'

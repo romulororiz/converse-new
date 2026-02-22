@@ -49,14 +49,14 @@ export default function ProfilePage() {
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-[14px] accent-button flex items-center justify-center text-xl font-bold shrink-0">
+          <div className="w-14 h-14 rounded-lg accent-button flex items-center justify-center text-xl font-bold shrink-0">
             {profile?.full_name?.[0]?.toUpperCase() ?? <User size={24} />}
           </div>
           <div>
             <div className="flex items-center gap-2 text-primary text-xs font-medium uppercase tracking-wide mb-0.5">
               <User size={12} /> Profile
             </div>
-            <h1 className="text-2xl font-bold tracking-tight">{profile?.full_name || 'Your Profile'}</h1>
+            <h1 className="font-serif text-3xl font-semibold tracking-tight">{profile?.full_name || 'Your Profile'}</h1>
             <p className="text-sm text-muted-foreground">{profile?.email ?? ''}</p>
           </div>
         </div>

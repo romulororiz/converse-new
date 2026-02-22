@@ -324,3 +324,20 @@ export async function sendMessageAndGetAIResponse(
     };
   }
 }
+
+/**
+ * Delete a chat session and all its messages.
+ * Only succeeds when the session belongs to the given user.
+ */
+export async function deleteChatSession(bookId: string, userId: string): Promise<boolean> {
+  const rows = await queryNeon<{ id: string }>(
+    'SELECT id FROM chat_sessions WHERE book_id = $1 AND user_id = $2 LIMIT 1',
+    [bookId, userId],
+  );
+  if (rows.length === 0) return false;
+
+  const sessionId = rows[0].id;
+  await queryNeon('DELETE FROM messages WHERE session_id = $1', [sessionId]);
+  await queryNeon('DELETE FROM chat_sessions WHERE id = $1 AND user_id = $2', [sessionId, userId]);
+  return true;
+}

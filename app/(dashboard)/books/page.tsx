@@ -31,7 +31,7 @@ function BooksLoading() {
       <div className="mb-6"><Skeleton className="h-8 w-48 mb-2" /><Skeleton className="h-4 w-64" /></div>
       <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
         {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="surface-card p-3"><Skeleton className="w-full aspect-[3/4] mb-2" /><Skeleton className="h-4 w-3/4 mb-1" /><Skeleton className="h-3 w-1/2" /></div>
+          <div key={i} className="surface-card p-3"><Skeleton className="w-full aspect-3/4 mb-2" /><Skeleton className="h-4 w-3/4 mb-1" /><Skeleton className="h-3 w-1/2" /></div>
         ))}
       </div>
     </div>
@@ -131,7 +131,7 @@ function BooksContent() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Library</h1>
+          <h1 className="font-serif text-3xl font-semibold tracking-tight">Library</h1>
           <p className="text-sm text-muted-foreground mt-0.5">Discover your next transformative read</p>
         </div>
         <MessageCounterBadge
@@ -168,7 +168,7 @@ function BooksContent() {
                 </span>
               )}
             </button>
-            <div className="hidden sm:flex items-center border border-border rounded-[12px] overflow-hidden">
+            <div className="hidden sm:flex items-center border border-border rounded-md overflow-hidden">
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-2 transition-colors ${viewMode === 'grid' ? 'bg-surface-2 text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
@@ -197,7 +197,7 @@ function BooksContent() {
         <div className={viewMode === 'grid' ? 'grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4' : 'space-y-3'}>
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="surface-card p-3">
-              <Skeleton className="w-full aspect-[3/4] mb-3" />
+              <Skeleton className="w-full aspect-3/4 mb-3" />
               <Skeleton className="h-4 w-3/4 mb-1" />
               <Skeleton className="h-3 w-1/2" />
             </div>

@@ -1,17 +1,27 @@
 import type { Metadata } from 'next';
-import { DM_Sans, Lora } from 'next/font/google';
+import { Cormorant_Garamond, Instrument_Sans, DM_Mono } from 'next/font/google';
 import './globals.css';
 import { RootAuthWrapper } from '@/components/RootAuthWrapper';
 
-const dmSans = DM_Sans({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
   display: 'swap',
 });
 
-const lora = Lora({
+const instrumentSans = Instrument_Sans({
   subsets: ['latin'],
-  variable: '--font-lora',
+  weight: ['400', '500', '600'],
+  variable: '--font-instrument',
+  display: 'swap',
+});
+
+const dmMono = DM_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-dm-mono',
   display: 'swap',
 });
 
@@ -22,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${lora.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${cormorant.variable} ${instrumentSans.variable} ${dmMono.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-background text-foreground font-sans antialiased">
         <RootAuthWrapper>{children}</RootAuthWrapper>
       </body>

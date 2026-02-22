@@ -32,7 +32,7 @@ export function Drawer({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[90] bg-black/60"
+            className="fixed inset-0 z-90 bg-black/60"
             onClick={onClose}
           />
           <motion.div
@@ -41,20 +41,21 @@ export function Drawer({
             exit={isRight ? { x: "100%" } : { y: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
             className={cn(
-              "fixed z-[91] bg-surface-1 border-border overflow-y-auto",
+              "fixed z-91 bg-(--bg-surface) border-border overflow-y-auto",
               isRight
                 ? "top-0 right-0 h-full w-full max-w-md border-l"
-                : "bottom-0 left-0 right-0 max-h-[85vh] rounded-t-[20px] border-t",
+                : "bottom-0 left-0 right-0 max-h-[85vh] rounded-t-lg border-t",
               className
             )}
           >
-            <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-surface-1 border-b border-border">
+            <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-(--bg-surface) border-b border-border">
               {title && (
-                <h2 className="text-lg font-semibold">{title}</h2>
+                <h2 className="font-serif text-xl font-semibold">{title}</h2>
               )}
               <button
                 onClick={onClose}
-                className="ghost-button p-2 rounded-[12px] text-muted-foreground hover:text-foreground cursor-pointer"
+                aria-label="Close"
+                className="ghost-button p-2 rounded-md text-muted-foreground hover:text-foreground cursor-pointer ml-auto"
               >
                 <X size={18} />
               </button>

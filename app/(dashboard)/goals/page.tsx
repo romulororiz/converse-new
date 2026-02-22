@@ -68,38 +68,40 @@ export default function GoalsPage() {
   const progressPct = goals.length > 0 ? Math.round((completedCount / goals.length) * 100) : 0;
 
   return (
-    <div className="space-y-6 pb-24 md:pb-6 max-w-2xl">
+    <div className="space-y-6 pb-24 md:pb-8 max-w-2xl">
       {/* Header */}
       <div>
-        <div className="flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wide mb-2">
-          <Target size={13} /> Goals
+        <div className="flex items-center gap-2 text-(--neo-accent) mb-2">
+          <Target size={13} />
+          <span className="mono text-[10px] font-medium uppercase tracking-[0.18em]">Goals</span>
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">Reading Goals</h1>
-        <p className="text-sm text-muted-foreground mt-0.5">Set intentions and track your reading journey</p>
+        <h1 className="font-serif text-3xl font-bold tracking-tight text-(--text-primary)">Reading Goals</h1>
+        <p className="text-sm text-(--text-muted) mt-0.5">Set intentions and track your reading journey</p>
       </div>
 
       {/* Progress */}
       {goals.length > 0 && (
-        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="surface-card p-5">
+        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="ink-card p-5">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-semibold text-foreground">Your Progress</span>
-            <span className="text-sm font-bold text-primary">{completedCount} / {goals.length}</span>
+            <span className="text-sm font-semibold text-(--text-primary)">Your Progress</span>
+            <span className="mono text-sm font-bold text-(--neo-accent)">{completedCount} / {goals.length}</span>
           </div>
-          <div className="h-2.5 bg-surface-2 rounded-full overflow-hidden">
+          <div className="h-2 bg-(--bg-overlay) rounded-full overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${progressPct}%` }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="h-full bg-primary rounded-full"
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+              className="h-full rounded-full"
+              style={{ background: 'linear-gradient(90deg, var(--neo-accent) 0%, var(--neo-accent-hover) 100%)' }}
             />
           </div>
-          <p className="text-xs text-muted-foreground mt-2">{progressPct}% complete</p>
+          <p className="mono text-[10px] text-(--text-muted) mt-2">{progressPct}% complete</p>
         </motion.div>
       )}
 
       {/* Add goal */}
-      <div className="surface-card p-5">
-        <h3 className="font-semibold text-sm mb-3 text-foreground">Add a new goal</h3>
+      <div className="ink-card p-5">
+        <h3 className="mono text-[10px] font-medium text-(--neo-accent) uppercase tracking-[0.15em] mb-4">Add a new goal</h3>
         <div className="flex flex-col gap-3">
           <input
             value={newGoalText}
@@ -107,13 +109,15 @@ export default function GoalsPage() {
             onKeyDown={(e) => e.key === 'Enter' && addGoal()}
             placeholder="e.g. Read 2 books about mindfulness..."
             data-testid="new-goal-input"
-            className="surface-inset flex h-10 w-full px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/30"
+            className="w-full h-10 px-3 py-2 text-sm text-(--text-primary) placeholder:text-(--text-muted) rounded-md border outline-none focus:border-(--neo-accent)/40 transition-colors"
+            style={{ backgroundColor: 'var(--bg-elevated)', borderColor: 'var(--border)' }}
           />
           <div className="flex gap-2">
             <select
               value={newGoalCategory}
               onChange={(e) => setNewGoalCategory(e.target.value)}
-              className="surface-inset h-10 px-3 text-sm text-foreground flex-1 focus-visible:outline-none cursor-pointer"
+              className="h-10 px-3 text-sm text-(--text-primary) flex-1 rounded-md border outline-none cursor-pointer"
+              style={{ backgroundColor: 'var(--bg-elevated)', borderColor: 'var(--border)' }}
             >
               {['Personal', 'Growth', 'Career', 'Finance', 'Mental Health', 'Discovery'].map((c) => (
                 <option key={c} value={c}>{c}</option>
@@ -123,9 +127,9 @@ export default function GoalsPage() {
               onClick={addGoal}
               disabled={!newGoalText.trim()}
               data-testid="add-goal-btn"
-              className="accent-button h-10 px-4 inline-flex items-center gap-1.5 text-sm font-medium disabled:opacity-40"
+              className="gold-button h-10 px-4 inline-flex items-center gap-1.5 text-sm font-semibold disabled:opacity-40"
             >
-              <Plus size={15} /> Add Goal
+              <Plus size={14} /> Add
             </button>
           </div>
         </div>
@@ -141,26 +145,28 @@ export default function GoalsPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, x: -20 }}
               data-testid={`goal-item-${goal.id}`}
-              className={`surface-card p-4 flex items-start gap-3 group transition-opacity ${goal.completed ? 'opacity-60' : ''}`}
+              className={`ink-card p-4 flex items-start gap-3 group transition-opacity ${goal.completed ? 'opacity-50' : ''}`}
             >
               <button
                 onClick={() => toggleGoal(goal.id)}
                 className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
-                  goal.completed ? 'bg-[#2E7D5E] border-[#2E7D5E]' : 'border-border hover:border-primary'
+                  goal.completed
+                    ? 'border-(--neo-accent) bg-(--neo-accent)'
+                    : 'border-(--border) hover:border-(--neo-accent)'
                 }`}
               >
-                {goal.completed && <Check size={11} className="text-white" />}
+                {goal.completed && <Check size={11} style={{ color: 'var(--text-on-accent)' }} />}
               </button>
               <div className="flex-1 min-w-0">
-                <p className={`text-sm text-foreground leading-relaxed ${goal.completed ? 'line-through text-muted-foreground' : ''}`}>
+                <p className={`text-sm leading-relaxed ${goal.completed ? 'line-through text-(--text-muted)' : 'text-(--text-primary)'}`}>
                   {goal.text}
                 </p>
-                <span className="text-[11px] text-muted-foreground mt-0.5 block">{goal.category}</span>
+                <span className="mono text-[10px] text-(--text-muted) mt-0.5 block">{goal.category}</span>
               </div>
               <button
                 onClick={() => removeGoal(goal.id)}
                 data-testid={`remove-goal-${goal.id}`}
-                className="opacity-0 group-hover:opacity-100 p-1 rounded-[6px] text-muted-foreground hover:text-danger hover:bg-danger/8 transition-all"
+                className="opacity-0 group-hover:opacity-100 p-1.5 rounded-md text-(--text-muted) hover:text-(--neo-danger) hover:bg-(--neo-danger)/10 transition-all"
               >
                 <Trash2 size={13} />
               </button>
@@ -171,39 +177,42 @@ export default function GoalsPage() {
 
       {/* Empty state */}
       {goals.length === 0 && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="surface-card p-12 text-center">
-          <div className="w-14 h-14 rounded-[18px] bg-primary/8 flex items-center justify-center mx-auto mb-4">
-            <Target size={26} className="text-primary" />
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="ink-card p-12 text-center">
+          <div className="w-14 h-14 rounded-xl bg-(--neo-accent-light) flex items-center justify-center mx-auto mb-4">
+            <Target size={26} className="text-(--neo-accent)" />
           </div>
-          <h3 className="font-bold text-lg mb-2 text-foreground">Set your first reading goal</h3>
-          <p className="text-sm text-muted-foreground mb-5">Intentions help you stay focused and motivated on your reading journey.</p>
+          <h3 className="font-serif font-bold text-lg mb-2 text-(--text-primary)">Set your first reading goal</h3>
+          <p className="text-sm text-(--text-muted) mb-5 leading-relaxed">Intentions help you stay focused and motivated on your reading journey.</p>
         </motion.div>
       )}
 
       {/* Suggested goals */}
-      <div className="surface-card p-5">
-        <h3 className="font-semibold text-sm mb-3 text-foreground">Suggested goals</h3>
-        <div className="space-y-2">
+      <div className="ink-card p-5">
+        <h3 className="mono text-[10px] font-medium text-(--neo-accent) uppercase tracking-[0.15em] mb-4">Suggested goals</h3>
+        <div className="space-y-1.5">
           {goalTemplates.map((t) => {
             const alreadyAdded = goals.some((g) => g.text === t.text);
             return (
-              <div key={t.text} className="flex items-center justify-between gap-3 p-2.5 rounded-[10px] hover:bg-surface-2 transition-colors">
+              <div
+                key={t.text}
+                className="flex items-center justify-between gap-3 p-2.5 rounded-lg hover:bg-(--bg-overlay) transition-colors"
+              >
                 <div className="flex items-center gap-2.5 flex-1 min-w-0">
-                  <div className="w-7 h-7 rounded-[8px] bg-surface-2 flex items-center justify-center shrink-0">
-                    <t.icon size={14} className="text-muted-foreground" />
+                  <div className="w-7 h-7 rounded-lg bg-(--neo-accent-light) flex items-center justify-center shrink-0">
+                    <t.icon size={13} className="text-(--neo-accent)" />
                   </div>
-                  <p className="text-sm text-foreground line-clamp-1">{t.text}</p>
+                  <p className="text-sm text-(--text-secondary) line-clamp-1">{t.text}</p>
                 </div>
                 <button
                   onClick={() => addTemplate(t.text, t.category)}
                   disabled={alreadyAdded}
-                  className={`shrink-0 h-7 px-3 rounded-[8px] text-xs font-medium transition-colors ${
+                  className={`shrink-0 h-7 px-3 rounded-lg text-xs font-medium transition-colors ${
                     alreadyAdded
-                      ? 'bg-[#2E7D5E]/10 text-[#2E7D5E] cursor-default'
-                      : 'bg-primary/8 text-primary hover:bg-primary/15'
+                      ? 'bg-(--neo-success)/10 text-(--neo-success) cursor-default'
+                      : 'bg-(--neo-accent-light) text-(--neo-accent) hover:bg-(--neo-accent)/20'
                   }`}
                 >
-                  {alreadyAdded ? <Check size={12} /> : <Plus size={12} />}
+                  {alreadyAdded ? <Check size={11} /> : <Plus size={11} />}
                 </button>
               </div>
             );

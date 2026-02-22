@@ -35,11 +35,11 @@ export function InsightsPanel({ highlights, onPrompt, onShareHighlight, onRemove
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-1 space-y-5">
+      <div className="flex-1 space-y-6">
         {/* Quick prompts */}
         <div>
-          <h3 className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1.5">
-            <Sparkles size={11} /> Quick prompts
+          <h3 className="mono text-[10px] font-medium text-(--neo-accent) uppercase tracking-[0.18em] mb-3 flex items-center gap-1.5">
+            <Sparkles size={10} /> Quick Prompts
           </h3>
           <div className="flex flex-wrap gap-1.5">
             {quickPrompts.map((prompt) => (
@@ -50,33 +50,33 @@ export function InsightsPanel({ highlights, onPrompt, onShareHighlight, onRemove
           </div>
         </div>
 
-        <div className="h-px bg-border" />
+        <div className="gold-rule" />
 
         {/* Saved highlights */}
         <div>
-          <h3 className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1.5">
-            <Lightbulb size={11} /> Saved highlights ({highlights.length})
+          <h3 className="mono text-[10px] font-medium text-(--neo-accent) uppercase tracking-[0.18em] mb-3 flex items-center gap-1.5">
+            <Lightbulb size={10} /> Highlights ({highlights.length})
           </h3>
           {highlights.length === 0 ? (
-            <p className="text-xs text-muted-foreground leading-relaxed">
+            <p className="text-xs text-(--text-muted) leading-relaxed italic">
               Tap the bookmark icon on any AI response to save highlights here.
             </p>
           ) : (
             <div className="space-y-2">
               {highlights.map((h, i) => (
-                <div key={i} className="highlight-callout p-3 text-xs leading-relaxed relative group">
-                  <span className="line-clamp-3 text-foreground/85 italic">&ldquo;{h}&rdquo;</span>
+                <div key={i} className="book-spine ink-panel p-3 text-xs leading-relaxed relative group rounded-md">
+                  <span className="line-clamp-3 text-(--text-secondary) italic font-serif text-[13px]">&ldquo;{h}&rdquo;</span>
                   <div className="flex items-center gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={() => handleCopy(i, h)}
-                      className="p-1.5 rounded-[8px] text-muted-foreground/60 hover:text-foreground hover:bg-surface-2 transition-colors"
+                      className="p-1.5 rounded-md text-(--text-muted) hover:text-(--text-primary) hover:bg-(--bg-overlay) transition-colors"
                       title="Copy highlight"
                     >
                       {copiedIndex === i ? <Check size={11} /> : <Copy size={11} />}
                     </button>
                     <button
                       onClick={() => onShareHighlight(h)}
-                      className="p-1.5 rounded-[8px] text-muted-foreground/60 hover:text-foreground hover:bg-surface-2 transition-colors"
+                      className="p-1.5 rounded-md text-(--text-muted) hover:text-(--text-primary) hover:bg-(--bg-overlay) transition-colors"
                       title="Share highlight"
                     >
                       <Share2 size={11} />
@@ -84,7 +84,7 @@ export function InsightsPanel({ highlights, onPrompt, onShareHighlight, onRemove
                     {onRemoveHighlight && (
                       <button
                         onClick={() => onRemoveHighlight(i)}
-                        className="p-1.5 rounded-[8px] text-[#C4822A] hover:bg-[#C4822A]/10 transition-colors ml-auto"
+                        className="p-1.5 rounded-md text-(--neo-accent) hover:bg-(--neo-accent-light) transition-colors ml-auto"
                         title="Remove highlight"
                       >
                         <X size={11} />
