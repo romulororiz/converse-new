@@ -40,5 +40,8 @@ export const config = {
     '/app/:path*',
     '/d',
     '/d/:path*',
+    // Mobile OAuth bridge — Neon Auth middleware must run here so the
+    // verifier token exchange happens before the route handler executes.
+    '/auth/mobile-bridge',
   ],
 };

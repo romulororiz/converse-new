@@ -32,6 +32,9 @@ importers:
       framer-motion:
         specifier: ^12.34.1
         version: 12.34.1(react-dom@19.1.0)(react@19.1.0)
+      jose:
+        specifier: ^6.1.3
+        version: 6.1.3
       lenis:
         specifier: ^1.3.17
         version: 1.3.17(react@19.1.0)
@@ -179,7 +182,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dev: false
 
-  /@better-auth/core@1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5)(jose@6.1.2)(kysely@0.28.11)(nanostores@1.1.0):
+  /@better-auth/core@1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5)(jose@6.1.3)(kysely@0.28.11)(nanostores@1.1.0):
     resolution: {integrity: sha512-cYjscr4wU5ZJPhk86JuUkecJT+LSYCFmUzYaitiLkizl+wCr1qdPFSEoAnRVZVTUEEoKpeS2XW69voBJ1NoB3g==}
     peerDependencies:
       '@better-auth/utils': 0.3.0
@@ -193,7 +196,7 @@ packages:
       '@better-fetch/fetch': 1.1.18
       '@standard-schema/spec': 1.1.0
       better-call: 1.1.5(zod@3.25.76)
-      jose: 6.1.2
+      jose: 6.1.3
       kysely: 0.28.11
       nanostores: 1.1.0
       zod: 4.3.6
@@ -209,7 +212,7 @@ packages:
       better-call: 1.1.8
       nanostores: ^1.0.1
     dependencies:
-      '@better-auth/core': 1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5)(jose@6.1.2)(kysely@0.28.11)(nanostores@1.1.0)
+      '@better-auth/core': 1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5)(jose@6.1.3)(kysely@0.28.11)(nanostores@1.1.0)
       '@better-auth/utils': 0.3.0
       '@better-fetch/fetch': 1.1.18
       '@simplewebauthn/browser': 13.2.2
@@ -225,7 +228,7 @@ packages:
     peerDependencies:
       '@better-auth/core': 1.4.6
     dependencies:
-      '@better-auth/core': 1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5)(jose@6.1.2)(kysely@0.28.11)(nanostores@1.1.0)
+      '@better-auth/core': 1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5)(jose@6.1.3)(kysely@0.28.11)(nanostores@1.1.0)
       '@better-auth/utils': 0.3.0
       '@better-fetch/fetch': 1.1.18
     dev: false
@@ -3373,7 +3376,7 @@ packages:
       vue:
         optional: true
     dependencies:
-      '@better-auth/core': 1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5)(jose@6.1.2)(kysely@0.28.11)(nanostores@1.1.0)
+      '@better-auth/core': 1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5)(jose@6.1.3)(kysely@0.28.11)(nanostores@1.1.0)
       '@better-auth/telemetry': 1.4.6(@better-auth/core@1.4.6)
       '@better-auth/utils': 0.3.0
       '@better-fetch/fetch': 1.1.18
@@ -3381,7 +3384,7 @@ packages:
       '@noble/hashes': 2.0.1
       better-call: 1.1.5(zod@3.25.76)
       defu: 6.1.4
-      jose: 6.1.2
+      jose: 6.1.3
       kysely: 0.28.11
       ms: 4.0.0-nightly.202508271359
       nanostores: 1.1.0
@@ -5018,6 +5021,10 @@ packages:
 
   /jose@6.1.2:
     resolution: {integrity: sha512-MpcPtHLE5EmztuFIqB0vzHAWJPpmN1E6L4oo+kze56LIs3MyXIj9ZHMDxqOvkP38gBR7K1v3jqd4WU2+nrfONQ==}
+    dev: false
+
+  /jose@6.1.3:
+    resolution: {integrity: sha512-0TpaTfihd4QMNwrz/ob2Bp7X04yuxJkjRGi4aKmOqwhov54i6u79oCv7T+C7lo70MKH6BesI3vscD1yb/yzKXQ==}
     dev: false
 
   /js-tokens@4.0.0:
